@@ -7,6 +7,7 @@ int ft_isascii(int c);
 int	ft_isalnum(int c);
 int ft_isprint(int c);
 size_t  ft_strlen(const char *s);
+void	*ft_memset(void *s, int c, size_t n);
 
 /*int	main()
 {
@@ -44,9 +45,30 @@ size_t  ft_strlen(const char *s);
 	return (0);
 }*/
 
-int main(int ac, char **av)
+/*int main(int ac, char **av)
 {
     if (ac > 1)
         printf("%s\n%ld, %ld\n", av[1], strlen(av[1]), ft_strlen(av[1]));
     return (0);
-}
+}*/
+
+int main(int ac, char **av)
+{
+	char	list[20];
+	int	i;
+
+	i = 0;
+	while (i < 18)
+	{
+		list[i] = 'a';
+		printf("%d\n", list[i++]);
+	}
+	list[18] = 0;
+	list[19] = 0;
+	printf("list, size %ld\n", sizeof(list));
+	ft_memset(list, 254, sizeof(list));
+	i = 0;
+	while (i < 20)
+		printf("%d\n", list[i++]);
+    return (0);
+}//Prueba si memset mira caracteres nulos para detenerse
