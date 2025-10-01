@@ -25,6 +25,6 @@ void	*ft_memset(void *s, int c, size_t n)
 	{
 		ls[i] = c;
 		i++;
-	}	
+	}
 	return (s);
 }

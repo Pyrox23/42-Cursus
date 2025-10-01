@@ -18,16 +18,3 @@ int	ft_isalpha(int c)
 		return (1024);
 	return (0);
 }
-
-/*int	main(int argc, char **argv)
-{
-	char	c;
-
-	c = 32;
-	while (c <= 126)
-	{
-		printf("%c: %d, %d\n", c, ft_isalpha(c), isalpha(c));
-		c++;
-	}
-	return (0);
-}*/

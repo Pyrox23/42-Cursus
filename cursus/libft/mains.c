@@ -9,6 +9,32 @@ int ft_isprint(int c);
 size_t  ft_strlen(const char *s);
 void	*ft_memset(void *s, int c, size_t n);
 
+/*int	main(int argc, char **argv)
+{
+	char	c;
+
+	c = 32;
+	while (c <= 126)
+	{
+		printf("%c: %d, %d\n", c, ft_isalpha(c), isalpha(c));
+		c++;
+	}
+	return (0);
+}*/
+
+/*int	main(int argc, char **argv)
+{
+	char	c;
+
+	c = 32;
+	while (c <= 126)
+	{
+		printf("%c: %d, %d\n", c, ft_isalpha(c), isalpha(c));
+		c++;
+	}
+	return (0);
+}*/
+
 /*int	main()
 {
 	int c = 0;

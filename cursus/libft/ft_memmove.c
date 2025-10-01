@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 15:22:16 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/09/30 15:22:16 by ramo-cou         ###   ########.fr       */
+/*   Created: 2025/10/01 09:29:25 by ramo-cou          #+#    #+#             */
+/*   Updated: 2025/10/01 10:27:26 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void    *ft_memmove(void *dest, const void *src, size_t n);
+#include <stddef.h>
 
-void    *ft_memmove(void *dest, const void *src, size_t n)
+void	*memmove(void *dst, const void *src, size_t len);
+
+void	*memmove(void *dst, const void *src, size_t len)
 {
-    //Este es complicado
-    return (dest);
+
 }

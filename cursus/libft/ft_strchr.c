@@ -10,20 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char    *ft_strchr(const char *s, int c);
+char	*ft_strchr(const char *s, int c);
 
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    char                *occ;
-    unsigned long long  i;
+	char				*occ;
+	unsigned long long	i;
 
-    occ = (void *) 0; //Puede que esto no se detecte como NULL
-    i = 0;
-    while (!occ && s[i])
-    {
-        if (s[i] == c)
-            occ = s[i];
-        i++;
-    }
-    return (occ);
+	occ = (void *) 0; //Puede que esto no se detecte como NULL
+	i = 0;
+	while (!occ && s[i])
+	{
+		if (s[i] == c)
+			occ = s[i];
+		i++;
+	}
+	return (occ);
 }

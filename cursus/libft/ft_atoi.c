@@ -1,0 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/01 08:28:35 by ramo-cou          #+#    #+#             */
+/*   Updated: 2025/10/01 08:54:40 by ramo-cou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_atoi(const char *nptr);
+
+static int	atoi_rec(char *str, int digit)
+{
+	int	nbr;
+	int	i;
+
+	if (digit == 0)
+		return (0);
+	i = 0;
+	nbr = *str - '0';
+	while (i < digit - 1)
+	{
+		nbr *= 10;
+		i++;
+	}
+	return (nbr + atoi_rec(++str, --digit));
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	dgt;
+	int	nbr;
+	int	pos;
+
+	dgt = 0;
+	pos = 0;
+	nbr = 1;
+	while (nptr[pos] == ' ' || (nptr[pos] >= '\t' && nptr[pos] <= '\r'))
+		pos++;
+	if (nptr[pos] == '-')
+		nbr = -1;
+	while (nptr[pos + dgt] <= '9' && nptr[pos + dgt] >= '0')
+		dgt++;
+	nbr *= atoi_rec(nptr + pos, dgt);
+	return (nbr);
+}

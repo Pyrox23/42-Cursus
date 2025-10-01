@@ -10,22 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void    *ft_memcpy(void *dest, const void *src, size_t n);
+#include <stddef.h>
 
-void    *ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-    char    *fr;
-    char    *to;
-    size_t  i;
+	char	*fr;
+	char	*to;
+	size_t	i;
 
-    //dest y src no pueden solaparse, verifica si memcpy normal hace esta verificacion
-    fr = (char *) scr;
-    to = (char *) dest;
-    i = 0;
-    while (i < n)
-    {
-        to[i] = fr[i];
-        i++;
-    }
-    return (dest);
+	//dest y src no pueden solaparse, verifica si memcpy normal hace esta verificacion
+	fr = (char *) src;
+	to = (char *) dest;
+	i = 0;
+	while (i < n)
+	{
+		to[i] = fr[i];
+		i++;
+	}
+	return (dest);
 }

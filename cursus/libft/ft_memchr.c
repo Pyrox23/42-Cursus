@@ -10,21 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void    *ft_memchr(const void *s, int c, size_t n);
+#include <stddef.h>
 
-void    *ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n);
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-    unsigned char   *mem;
-    size_t          i;
-    unsigned char   *occ;
+	unsigned char	*mem;
+	size_t			i;
+	unsigned char	*occ;
 
-    occ = 0;
-    mem = (unsigned char *) s; //Puede que esto de problemas
-    while (!occ && i < n)
-    {
-        if (mem[i] == c)
-            occ = mem[i];
-        i++;
-    }
-    return ((void *) occ);
+	occ = 0;
+	mem = (unsigned char *) s; //Puede que esto de problemas
+	while (!occ && i < n)
+	{
+		if (mem[i] == c)
+			occ = mem[i];
+		i++;
+	}
+	return ((void *) occ);
 }
