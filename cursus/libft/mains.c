@@ -1,13 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-#include <stddef.h>
-
-int ft_isascii(int c);
-int	ft_isalnum(int c);
-int ft_isprint(int c);
-size_t  ft_strlen(const char *s);
-void	*ft_memset(void *s, int c, size_t n);
+#include "libft.h"
 
 /*int	main(int argc, char **argv)
 {
@@ -78,7 +72,7 @@ void	*ft_memset(void *s, int c, size_t n);
     return (0);
 }*/
 
-int main(int ac, char **av)
+/*int main(int ac, char **av)
 {
 	char	list[20];
 	int	i;
@@ -97,4 +91,19 @@ int main(int ac, char **av)
 	while (i < 20)
 		printf("%d\n", list[i++]);
     return (0);
-}//Prueba si memset mira caracteres nulos para detenerse
+}//Prueba si memset mira caracteres nulos para detenerse*/
+
+
+/*int	main(int ac, char **av)
+{
+	int	nbr;
+
+	if (ac > 1)
+	{
+		nbr = ft_atoi(av[1]);
+		printf("input: %d, output: %s\n", nbr, ft_itoa(nbr));
+	}
+	else
+		printf("input: %d, output: %s\n", 15195151951, ft_itoa(15195151951));
+	return (0);
+}*/

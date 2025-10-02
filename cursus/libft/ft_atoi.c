@@ -6,13 +6,13 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 08:28:35 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/01 08:54:40 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/02 21:59:15 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *nptr);
-
-static int	atoi_rec(char *str, int digit)
+#include "libft.h"
+//Intenta que sea iterativo
+static int	atoi_rec(const char *str, int digit)
 {
 	int	nbr;
 	int	i;
@@ -35,13 +35,18 @@ int	ft_atoi(const char *nptr)
 	int	nbr;
 	int	pos;
 
+	if (!nptr)
+		return (0);
 	dgt = 0;
 	pos = 0;
 	nbr = 1;
 	while (nptr[pos] == ' ' || (nptr[pos] >= '\t' && nptr[pos] <= '\r'))
 		pos++;
 	if (nptr[pos] == '-')
+	{
 		nbr = -1;
+		pos++;
+	}
 	while (nptr[pos + dgt] <= '9' && nptr[pos + dgt] >= '0')
 		dgt++;
 	nbr *= atoi_rec(nptr + pos, dgt);

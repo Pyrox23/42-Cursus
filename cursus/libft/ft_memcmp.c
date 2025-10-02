@@ -6,22 +6,20 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 09:11:31 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/01 09:28:24 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/02 20:37:01 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-int	memcmp(const void *b1, const void *b2, size_t len);
-
-int	memcmp(const void *b1, const void *b2, size_t len)
+int	ft_memcmp(const void *b1, const void *b2, size_t len)
 {
 	char	*c1;
 	char	*c2;
 	size_t	i;
 	int		check;
 
-	if (!len)
+	if (!b1 || !b2 || !len) //Revisa que pasa si pasas un string NULL a la funcion original
 		return (0);
 	i = 0;
 	c1 = (char *) b1;

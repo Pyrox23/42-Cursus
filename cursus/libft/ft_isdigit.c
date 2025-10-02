@@ -6,14 +6,11 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 12:43:36 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/01 08:08:16 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:52:41 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
-
-int	ft_isdigit(int c);
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

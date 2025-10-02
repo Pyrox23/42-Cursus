@@ -6,16 +6,13 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 08:50:57 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/01 10:39:07 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/02 21:41:55 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-char	*strnstr(const char *big, const char *little, size_t len);
-size_t	ft_strlen(const char *s);
-
-char	*strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t		i;
 	size_t		j;
@@ -24,7 +21,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 
 	found = 0;
 	if (!little || !*little)
-		return (big);
+		return ((char *) big);
 	i = 0;
 	llen = ft_strlen(little);
 	while (i + llen < len && !found && big[i])
@@ -38,6 +35,6 @@ char	*strnstr(const char *big, const char *little, size_t len)
 			i++;
 	}
 	if (found)
-		return (big + i);
-	return (0);
+		return ((char *) big + i);
+	return (NULL);
 }

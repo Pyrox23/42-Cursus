@@ -6,14 +6,11 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 09:37:22 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/01 10:27:13 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:54:33 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-void	*ft_calloc(size_t nmemb, size_t size);
-void	*ft_memset(void *s, int c, size_t n);
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
