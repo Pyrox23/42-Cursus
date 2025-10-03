@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:50:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/03 10:34:00 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:02:38 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstclear(t_list **lst, void (*del)(void*));
+void	ft_lstdelone(t_list *lst, void (*del)(void*));
+t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
+int		ft_lstsize(t_list *lst);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *b1, const void *b2, size_t len);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
