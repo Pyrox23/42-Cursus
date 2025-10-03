@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:50:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/03 13:02:38 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/03 20:23:51 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

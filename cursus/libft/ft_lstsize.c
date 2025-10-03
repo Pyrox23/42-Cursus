@@ -6,13 +6,13 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 10:40:34 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/03 10:42:41 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/03 20:50:56 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	size_t	len;
 
