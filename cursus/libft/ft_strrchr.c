@@ -14,10 +14,12 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char				*occ;
-	unsigned long long	i;
+	char	*occ;
+	size_t	i;
 
-	occ = (void *) 0; //Puede que esto no se detecte como NULL
+	if (!s)
+		return (NULL);
+	occ = NULL;
 	i = 0;
 	while (s[i])
 	{
@@ -25,5 +27,7 @@ char	*ft_strrchr(const char *s, int c)
 			occ = (char *) s + i;
 		i++;
 	}
+	if (!occ && s[i] == c)
+		occ = (char *) s + i;
 	return (occ);
 }

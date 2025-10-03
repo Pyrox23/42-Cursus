@@ -22,6 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 		return (NULL);
 	occ = NULL;
 	mem = (unsigned char *) s; //Puede que esto de problemas
+	i = 0;
 	while (!occ && i < n)
 	{
 		if (mem[i] == c)

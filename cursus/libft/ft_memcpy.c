@@ -18,7 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char	*to;
 	size_t	i;
 
-	//dest y src no pueden solaparse, verifica si memcpy normal hace esta verificacion
+	if (!dest || !src)
+		return (dest);
 	fr = (char *) src;
 	to = (char *) dest;
 	i = 0;

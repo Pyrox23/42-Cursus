@@ -1,14 +1,13 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include "libft.h"
 
-/*int	main(int argc, char **argv)
+/*int	main(void)
 {
-	char	c;
-
-	c = 32;
-	while (c <= 126)
+	int c = 0;
+	while (c < 127)
 	{
 		printf("%c: %d, %d\n", c, ft_isalpha(c), isalpha(c));
 		c++;
@@ -16,20 +15,7 @@
 	return (0);
 }*/
 
-/*int	main(int argc, char **argv)
-{
-	char	c;
-
-	c = 32;
-	while (c <= 126)
-	{
-		printf("%c: %d, %d\n", c, ft_isalpha(c), isalpha(c));
-		c++;
-	}
-	return (0);
-}*/
-
-/*int	main()
+/*int	main(void)
 {
 	int c = 0;
 	while(c < 127)
@@ -38,6 +24,18 @@
 		c++;
 	}
 	printf("EOF: %d, %d\n", isalnum(-1), ft_isalnum(-1));
+	return (0);
+}*/
+
+/*int	main(void)
+{
+	int c = 0;
+	while(c < 127)
+	{
+		printf("%c: %d, %d\n", c, isdigit(c), ft_isdigit(c));
+		c++;
+	}
+	printf("EOF: %d, %d\n", isdigit(-1), ft_isdigit(-1));
 	return (0);
 }*/
 
@@ -68,31 +66,164 @@
 /*int main(int ac, char **av)
 {
     if (ac > 1)
-        printf("%s\n%ld, %ld\n", av[1], strlen(av[1]), ft_strlen(av[1]));
+    	printf("%s\n%ld, %ld\n", av[1], strlen(NULL), ft_strlen(NULL));
     return (0);
 }*/
 
-/*int main(int ac, char **av)
+/*void	prueba(void *(*f)(void *, int, size_t))
 {
-	char	list[20];
+	int		list[30];
+	int		*test;
 	int	i;
 
 	i = 0;
-	while (i < 18)
+	printf("original:\n");
+	while (i < 30)
 	{
-		list[i] = 'a';
+		list[i] = 156;
 		printf("%d\n", list[i++]);
 	}
-	list[18] = 0;
-	list[19] = 0;
 	printf("list, size %ld\n", sizeof(list));
-	ft_memset(list, 254, sizeof(list));
-	i = 0;
-	while (i < 20)
-		printf("%d\n", list[i++]);
-    return (0);
-}//Prueba si memset mira caracteres nulos para detenerse*/
+	test = f(NULL, -26, sizeof(list));
+	i = -1;
+	printf("resultado:\n");
+	while (++i < 30)
+		printf("i%d: %d\n", i, list[i]);
+}
 
+int main(void)
+{
+	prueba(memset);
+	prueba(ft_memset);
+    return (0);
+}*/
+
+/*void	prueba(void (*f)(void *, size_t))
+{
+	char	list[30];
+	int	i;
+
+	i = 0;
+	printf("original:\n");
+	while (i < 30)
+	{
+		list[i] = 96;
+		printf("%d\n", list[i++]);
+	}
+	printf("list, size %ld\n", sizeof(list));
+	f(list, sizeof(list));
+	i = -1;
+	printf("resultado:\n");
+	while (++i < 30)
+		printf("i%d: %d\n", i, list[i]);
+}
+
+int main(void)
+{
+	prueba(bzero);
+	prueba(ft_bzero);
+    return (0);
+}*/
+
+/*void	prueba(void *(*f)(void *, const void *, size_t))
+{
+	int	list[30];
+	int	*test;
+	int	i;
+
+	i = 0;
+	printf("original:\n");
+	while (i < 30)
+	{
+		list[i] = i;
+		printf("%d\n", list[i++]);
+	}
+	printf("list, size %ld\n", sizeof(list));
+	test = f(list, list + 5, 40);
+	i = -1;
+	printf("resultado:\n");
+	while (++i < 25)
+		printf("i%d: %d\n", i, test[i]);
+}
+
+int main(void)
+{
+	prueba(memmove); //Memmove y memcpy son intercambiables
+	prueba(ft_memmove);//Memcpy fue mejorado para funcionar como memmove en algunas plataformas
+    return (0);
+}*/
+
+/*void	prueba(const char *str, int (*f)(int))
+{
+	size_t	i;
+	char	*test;
+
+	i = 0;
+	printf("input: %s\n", str);
+	test = (char *) ft_calloc(ft_strlen(str), sizeof(char));
+	if (!test)
+		return ;
+	while (str[i])
+	{
+		test[i] = f(str[i]);
+		i++;
+	}
+	printf("resultado: %s\n", test);
+	free(test);
+}
+
+int main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], toupper);
+	prueba(av[1], ft_toupper);
+	prueba(av[1], tolower);
+	prueba(av[1], ft_tolower);
+	return (0);
+}*/
+
+/*void	prueba(const char *str, int c, char *(*f)(const char *, int))
+{
+	char	*test;
+
+	printf("input: %s\n", str);
+	test = f(str, c);
+	printf("resultado: ");
+	if (!test)
+		printf("not found\n");
+	else
+		printf("direccion=%ld, str=%s\n", (size_t) test, test);
+}
+
+int main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], av[2][0], strchr);
+	prueba(av[1], av[2][0], ft_strchr);
+	prueba(av[1], av[2][0], strrchr);
+	prueba(av[1], av[2][0], ft_strrchr);
+	return (0);
+}*/
+
+/*void	prueba(const char *str1, const char *str2, size_t len, int (*f)(const char *, const char *, size_t))
+{
+	int	test;
+
+	printf("input:\nin1: %s\nin2: %s\nn = %ld\n", str1, str2, len);
+	test = f(".", ".", len);
+	printf("resultado: %d\n", test);
+}
+
+int main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], av[2], ft_strlen(av[1]), strncmp);
+	prueba(av[1], av[2], ft_strlen(av[1]), ft_strncmp);
+	return (0);
+}*/
 
 /*int	main(int ac, char **av)
 {
