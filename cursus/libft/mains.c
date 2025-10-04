@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include <bsd/string.h>
 #include <strings.h>
 #include "libft.h"
 
@@ -225,12 +226,12 @@ int main(int ac, char **av)
 	return (0);
 }*/
 
-void	prueba(void *str, int c, void *(*f)(const void *, int, size_t))
+/*void	prueba(void *str, int c, void *(*f)(const void *, int, size_t))
 {
 	int	*test;
 
 	//printf("input: %s\n", (char *) str);
-	test = (int *) f(str, c, 20 * 4); //*4 si es int, desde el primer bit de 4 mide el valor de int
+	test = (int *) f(str, c, 20 * 4); // *4 si es int, desde el primer bit de 4 mide el valor de int
 	printf("resultado: ");
 	if (!test)
 		printf("not found\n");
@@ -254,18 +255,186 @@ int	main(void)
 	prueba(lst, c, memchr);
 	prueba(lst, c, ft_memchr);
 	return (0);
+}*/
+
+/*void	prueba(const void *ls1, const void *ls2, size_t len, int (*f)(const void *, const void *, size_t))
+{
+	int	test;
+
+	test = f(ls1, ls2, len);
+	printf("resultado: %d\n", test);
 }
 
-/*int	main(int ac, char **av)
+int main(void)
 {
-	int	nbr;
+	int	ls1[20];
+	int	ls2[50];
+	int	i;
 
-	if (ac > 1)
+	i = -1;
+	while (++i < 20)
 	{
-		nbr = ft_atoi(av[1]);
-		printf("input: %d, output: %s\n", nbr, ft_itoa(nbr));
+		ls1[i] = i;
+		printf("ls1 > i%d: %d\n", i, ls1[i]);
+	}
+	i = -1;
+	while (++i < 50)
+	{
+		ls2[i] = i;
+		printf("ls2 > i%d: %d\n", i, ls2[i]);
+	}
+	//printf("input:\nin1: %s\nin2: %s\nn = %d\n", av[1], av[2], 20);
+	prueba(ls1, ls2, 30 * 4, memcmp);
+	prueba(ls1, ls2, 30 * 4, ft_memcmp);
+	return (0);
+}*/
+
+/*void	prueba(const char *big, const char *little, size_t len, char *(*f)(const char *, const char *, size_t))
+{
+	char	*test;
+
+	test = f(big, little, len);
+	printf("resultado: %s\n", test);
+	test = strstr(big, little);
+	printf("resultado: %s\n", test);
+}
+
+int main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], av[2], 20, ft_strnstr);
+	return (0);
+}*/
+
+/*void	prueba(const char *av, int (*f)(const char *))
+{
+	int	test;
+
+	test = f(av);
+	printf("input: %s, atoi: %d, itoa: %s\n", av, test, ft_itoa(test));
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], atoi);
+	prueba(av[1], ft_atoi);
+	return (0);
+}*/
+
+/*void	prueba(const char *src, size_t (*f)(char *, const char *, size_t))
+{
+	char	*test;
+	size_t	len;
+
+	test = NULL;
+	len = f(test, src, 0);
+	printf("src len: %ld (add 1 for calloc)\n", len);
+	test = ft_calloc(len + 1, sizeof(char));
+	if (!test)
+	{
+		printf("mem failure\n");
+		return ;
+	}
+	len = f(test, src, len + 1);
+	printf("src: %s\ndest: %s\n", src, test);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], ft_strlcpy);
+	return (0);
+}*/
+
+/*void	prueba(const char *src, size_t (*f)(char *, const char *, size_t))
+{
+	char	*test;
+	char	*dest;
+	size_t	len;
+
+	test = "hola que tal";
+	len = f(test, src, ft_strlen(test));
+	printf("result of lcat len: %ld (add 1 for calloc)\n", len);
+	len++;
+	dest = ft_calloc(len, sizeof(char));
+	if (!dest)
+	{
+		printf("mem failure\n");
+		return ;
+	}
+	ft_strlcpy(dest, test, len);
+	len = f(dest, src, len);
+	printf("src: %s\ndest: %s\n", src, dest);
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], ft_strlcat);
+	return (0);
+}*/
+
+
+/*void	prueba(size_t nmemb, size_t size, void *(*f)(size_t, size_t))
+{
+	char	*test;
+	size_t	i;
+
+	i = 0;
+	printf("inputs: %ld, %ld\n", nmemb, size);
+	test = f(nmemb, size);
+	if (!test)
+	{
+		printf("failed\n");
+		return ;
+	}
+	while (i < nmemb * size)
+	{
+		printf("i%ld: %d\n", i, test[i]);
+		i++;
+	}
+	free(test);
+	printf("free successful\n");
+}
+
+int	main(void)
+{
+	prueba(0, 0, calloc);
+	prueba(0, 0, ft_calloc);
+	prueba(__SIZE_MAX__, 2, calloc);
+	prueba(__SIZE_MAX__, 2, ft_calloc);
+	prueba(__SIZE_MAX__ / 2, 1, calloc);
+	prueba(__SIZE_MAX__ / 2, 1, ft_calloc);
+	prueba(40, 4, calloc);
+	prueba(40, 4, ft_calloc);
+	return (0);
+}*/
+
+/*void	prueba(const char *src, char *(*f)(const char *))
+{
+	char	*test;
+
+	printf("input: %s\n", src);
+	test = f(src);
+	printf("output: %s\n", test);
+	if (test)
+	{
+		free(test);
+		printf("free successful\n");
 	}
 	else
-		printf("input: %d, output: %s\n", 15195151951, ft_itoa(15195151951));
+		printf("mem failure\n");
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], ft_strdup);
 	return (0);
 }*/

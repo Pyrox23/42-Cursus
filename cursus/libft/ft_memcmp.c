@@ -6,31 +6,31 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 09:11:31 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/02 20:37:01 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/04 15:17:12 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *b1, const void *b2, size_t len)
+int	ft_memcmp(const void *b1, const void *b2, size_t n)
 {
-	char	*c1;
-	char	*c2;
-	size_t	i;
-	int		check;
+	unsigned char	*c1;
+	unsigned char	*c2;
+	size_t			i;
+	int				check;
 
-	if (!b1 || !b2 || !len) //Revisa que pasa si pasas un string NULL a la funcion original
+	if (!n)
 		return (0);
 	i = 0;
-	c1 = (char *) b1;
-	c2 = (char *) b2;
+	c1 = (unsigned char *) b1;
+	c2 = (unsigned char *) b2;
 	check = 0;
-	while (c1[i] && c2[i] && !check && i < len)
+	while (!check && i < n)
 	{
 		check = c1[i] - c2[i];
 		i++;
 	}
-	if (!check && len)
+	if (!check && i < n)
 		return (c1[i] - c2[i]);
 	return (check);
 }

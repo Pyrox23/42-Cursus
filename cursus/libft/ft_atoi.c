@@ -6,12 +6,12 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 08:28:35 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/02 21:59:15 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/04 16:36:56 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//Intenta que sea iterativo
+
 static int	atoi_rec(const char *str, int digit)
 {
 	int	nbr;
@@ -42,9 +42,10 @@ int	ft_atoi(const char *nptr)
 	nbr = 1;
 	while (nptr[pos] == ' ' || (nptr[pos] >= '\t' && nptr[pos] <= '\r'))
 		pos++;
-	if (nptr[pos] == '-')
+	if (nptr[pos] == '-' || nptr[pos] == '+')
 	{
-		nbr = -1;
+		if (nptr[pos] == '-')
+			nbr = -1;
 		pos++;
 	}
 	while (nptr[pos + dgt] <= '9' && nptr[pos + dgt] >= '0')
