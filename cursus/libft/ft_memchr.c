@@ -21,7 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	if (!s)
 		return (NULL);
 	occ = NULL;
-	mem = (unsigned char *) s; //Puede que esto de problemas
+	mem = (unsigned char *) s;
 	i = 0;
 	while (!occ && i < n)
 	{

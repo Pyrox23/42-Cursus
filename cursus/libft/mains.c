@@ -225,6 +225,37 @@ int main(int ac, char **av)
 	return (0);
 }*/
 
+void	prueba(void *str, int c, void *(*f)(const void *, int, size_t))
+{
+	int	*test;
+
+	//printf("input: %s\n", (char *) str);
+	test = (int *) f(str, c, 20 * 4); //*4 si es int, desde el primer bit de 4 mide el valor de int
+	printf("resultado: ");
+	if (!test)
+		printf("not found\n");
+	else
+		printf("direccion=%ld, ans=%d\n", (size_t) test, *test);
+}
+
+int	main(void)
+{
+	int	lst[20];
+	int	c;
+	int	i;
+
+	i = -1;
+	c = 19;
+	while (++i < 20)
+	{
+		lst[i] = i;
+		printf("i%d: %d\n", i, lst[i]);
+	}
+	prueba(lst, c, memchr);
+	prueba(lst, c, ft_memchr);
+	return (0);
+}
+
 /*int	main(int ac, char **av)
 {
 	int	nbr;
