@@ -16,18 +16,18 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	*occ;
 	size_t	i;
+	char	ch;
 
-	if (!s)
-		return (NULL);
 	occ = NULL;
 	i = 0;
+	ch = (char) c;
 	while (!occ && s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == ch)
 			occ = (char *) s + i;
 		i++;
 	}
-	if (!occ && s[i] == c)
+	if (!occ && s[i] == ch)
 		occ = (char *) s + i;
 	return (occ);
 }

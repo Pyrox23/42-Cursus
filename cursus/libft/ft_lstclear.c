@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:02:02 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/03 13:11:33 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/05 19:37:39 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	{
 		node = *lst;
 		*lst = (*lst)->next;
-		del(node->content);
-		free(node);
+		ft_lstdelone(node, del);
 	}
 	*lst = NULL;
 }

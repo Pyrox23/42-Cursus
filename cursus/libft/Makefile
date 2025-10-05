@@ -23,6 +23,7 @@ SRC = ft_atoi.c \
 		ft_strdup.c \
 		ft_striteri.c \
 		ft_strjoin.c \
+		ft_strlcat.c \
 		ft_strlcpy.c \
 		ft_strlen.c \
 		ft_strmapi.c \
@@ -32,28 +33,41 @@ SRC = ft_atoi.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c \
-		libft.h
+		ft_toupper.c 
 
+SRC_BONUS = ft_lstadd_back.c \
+			ft_lstadd_front.c \
+			ft_lstclear.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstlast.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstsize.c
 
 OBJ = $(SRC:.c=.o)
+
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
 CC = cc
 
-all: LIBFT
+all: $(NAME)
 
-LIBFT: $(OBJ)
+$(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+bonus: $(OBJ_BONUS)
+	ar rcs $(NAME) $(OBJ_BONUS)

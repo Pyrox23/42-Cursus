@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:47:11 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/02 20:53:53 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:31:54 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	act_size;
 	size_t	i;
 
+	if (start >= ft_strlen(s))
+		return (ft_calloc(1, sizeof(char)));
 	act_size = 0;
 	while (s[start + act_size] && act_size < len)
 		act_size++;

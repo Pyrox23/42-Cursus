@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 08:50:57 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/04 16:22:50 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:46:57 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t		llen;
 
 	found = 0;
-	if (!little)
-		return (NULL);
 	if (!*little)
 		return ((char *) big);
 	i = 0;
 	llen = ft_strlen(little) - 1;
-	while (i + llen < len && !found && big[i])
+	while (big[i] && i + llen < len && !found)
 	{
 		j = 0;
 		while (big[i + j] == little[j] && little[j])

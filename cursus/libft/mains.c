@@ -201,10 +201,10 @@ int main(int ac, char **av)
 {
 	if (ac < 2)
 		return (1);
-	prueba(av[1], av[2][0], strchr);
-	prueba(av[1], av[2][0], ft_strchr);
-	prueba(av[1], av[2][0], strrchr);
-	prueba(av[1], av[2][0], ft_strrchr);
+	prueba(av[1], 't' + 256, strchr);
+	prueba(av[1], 't' + 256, ft_strchr);
+	prueba(av[1], 't' + 256, strrchr);
+	prueba(av[1], 't' + 256, ft_strrchr);
 	return (0);
 }*/
 
@@ -213,7 +213,7 @@ int main(int ac, char **av)
 	int	test;
 
 	printf("input:\nin1: %s\nin2: %s\nn = %ld\n", str1, str2, len);
-	test = f(".", ".", len);
+	test = f(str1, str2, len);
 	printf("resultado: %d\n", test);
 }
 
@@ -221,8 +221,8 @@ int main(int ac, char **av)
 {
 	if (ac < 2)
 		return (1);
-	prueba(av[1], av[2], ft_strlen(av[1]), strncmp);
-	prueba(av[1], av[2], ft_strlen(av[1]), ft_strncmp);
+	prueba("test\0", "test\200", 7, strncmp);
+	prueba("test\0", "test\200", 7, ft_strncmp);
 	return (0);
 }*/
 
@@ -236,7 +236,7 @@ int main(int ac, char **av)
 	if (!test)
 		printf("not found\n");
 	else
-		printf("direccion=%ld, ans=%d\n", (size_t) test, *test);
+		printf("original= %ld, direccion=%ld, ans=%d\n", (size_t) str, (size_t) test, *test);
 }
 
 int	main(void)
@@ -255,7 +255,7 @@ int	main(void)
 	prueba(lst, c, memchr);
 	prueba(lst, c, ft_memchr);
 	return (0);
-}*/
+}
 
 /*void	prueba(const void *ls1, const void *ls2, size_t len, int (*f)(const void *, const void *, size_t))
 {
@@ -436,5 +436,91 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (1);
 	prueba(av[1], ft_strdup);
+	return (0);
+}*/
+
+/*void	prueba(const char *src, const char *set, char *(*f)(const char *, const char *))
+{
+	char	*test;
+
+	printf("input\nstr: %s\nset: %s\n", src, set);
+	test = f(src, set);
+	printf("output: %s\n", test);
+	if (test)
+	{
+		free(test);
+		printf("free successful\n");
+	}
+	else
+		printf("mem failure\n");
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], av[2], ft_strtrim);
+	return (0);
+}*/
+
+/*void	prueba(const char *src, char c, char **(*f)(const char *, char))
+{
+	char	**test;
+	size_t	i;
+
+	i = 0;
+	printf("input\nstr: %s\nc: %c\n", src, c);
+	test = f(src, c);
+	printf("output:\n");
+	while (test && test[i])
+		printf("%s\n", test[i++]);
+	if (test)
+	{
+		i = 0;
+		while (test[i])
+			free(test[i++]);
+		free(test);
+		printf("free successful\n");
+	}
+	else
+		printf("mem failure\n");
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], av[2][0], ft_split);
+	return (0);
+}*/
+
+char	func(unsigned int pos, char c)
+{
+	if (pos % 2)
+		return (ft_toupper(c));
+	return (ft_tolower(c));
+}
+
+/*void	prueba(const char *src, char (*func)(unsigned int, char), char *(*f)(const char *, char (*)(unsigned int, char)))
+{
+	char	*test;
+
+	printf("input\nstr: %s\n", src);
+	test = f(src, func);
+	printf("output: %s\n", test);
+	if (test)
+	{
+		free(test);
+		printf("free successful\n");
+	}
+	else
+		printf("mem failure\n");
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (1);
+	prueba(av[1], &func, ft_strmapi);
 	return (0);
 }*/

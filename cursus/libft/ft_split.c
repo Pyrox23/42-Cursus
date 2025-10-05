@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:03:28 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/04 17:53:03 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:48:04 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static size_t	get_words(const char *s, char c)
 			if (s[i])
 			{
 				arr_len++;
-				while (s[i] != c)
+				while (s[i] && s[i] != c)
 					i++;
 			}
 		}
@@ -88,7 +88,7 @@ char	**ft_split(char const *s, char c)
 	{
 		if (s[i] != c)
 		{
-			i += alloc_word(&arr[j], s, c);
+			i += alloc_word(&arr[j], s + i, c);
 			if (!arr[j++])
 				free_list(&arr, j - 1);
 		}

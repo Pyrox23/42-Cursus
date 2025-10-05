@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 08:28:35 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/04 16:36:56 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:27:45 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	ft_atoi(const char *nptr)
 	int	nbr;
 	int	pos;
 
-	if (!nptr)
-		return (0);
 	dgt = 0;
 	pos = 0;
 	nbr = 1;

@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 09:29:25 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/03 09:31:11 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:49:54 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	char	*fr;
-	char	*to;
-	size_t	i;
+	unsigned char	*fr;
+	unsigned char	*to;
+	size_t			i;
 
+	if (!dest || !src || !len)
+		return (dest);
 	i = 0;
-	fr = (char *) src;
-	to = (char *) dest;
+	fr = (unsigned char *) src;
+	to = (unsigned char *) dest;
 	if (fr > to)
 	{
-		while (i < len)
-		{
-			to[i] = fr[i];
-			i++;
-		}
+		while (++i < len + 1)
+			to[i - 1] = fr[i - 1];
 	}
 	else
 	{
