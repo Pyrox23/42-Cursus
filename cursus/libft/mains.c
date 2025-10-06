@@ -255,7 +255,7 @@ int	main(void)
 	prueba(lst, c, memchr);
 	prueba(lst, c, ft_memchr);
 	return (0);
-}
+}*/
 
 /*void	prueba(const void *ls1, const void *ls2, size_t len, int (*f)(const void *, const void *, size_t))
 {
@@ -463,7 +463,7 @@ int	main(int ac, char **av)
 	return (0);
 }*/
 
-/*void	prueba(const char *src, char c, char **(*f)(const char *, char))
+void	prueba(const char *src, char c, char **(*f)(const char *, char))
 {
 	char	**test;
 	size_t	i;
@@ -492,16 +492,16 @@ int	main(int ac, char **av)
 		return (1);
 	prueba(av[1], av[2][0], ft_split);
 	return (0);
-}*/
+}
 
-char	func(unsigned int pos, char c)
+/*char	func(unsigned int pos, char c)
 {
 	if (pos % 2)
 		return (ft_toupper(c));
 	return (ft_tolower(c));
 }
 
-/*void	prueba(const char *src, char (*func)(unsigned int, char), char *(*f)(const char *, char (*)(unsigned int, char)))
+void	prueba(const char *src, char (*func)(unsigned int, char), char *(*f)(const char *, char (*)(unsigned int, char)))
 {
 	char	*test;
 
