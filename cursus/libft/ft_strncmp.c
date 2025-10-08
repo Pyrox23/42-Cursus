@@ -6,12 +6,11 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 10:28:03 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/05 14:25:57 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/08 20:07:29 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

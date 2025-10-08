@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:03:28 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/06 19:22:45 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/08 20:06:33 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ static void	free_list(char ***arr, size_t len)
 	while (i < len)
 		free(arr[0][i++]);
 	free(arr[0]);
-	arr = NULL;
+	*arr = NULL;
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
-	size_t	arr_len;
 	size_t	i;
 	size_t	j;
 
-	arr_len = get_words(s, c);
-	arr = (char **) ft_calloc(arr_len, sizeof(char *));
+	if (!s)
+		return (NULL);
+	arr = (char **) ft_calloc(get_words(s, c), sizeof(char *));
 	if (!arr)
 		return (NULL);
 	i = 0;
