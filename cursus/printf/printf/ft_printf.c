@@ -6,22 +6,21 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:20:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/11 15:52:34 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/12 00:09:01 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 // conversion();
 // flags/precision(#+. );
 // width(flags 0 y -);
 // return to print at main func
 
-static size_t	ft_power(int base, int exp)
+static t_ull	ft_power(int base, int exp)
 {
 	int		i;
-	size_t	ans;
+	t_ull	ans;
 
 	if (!exp)
 		return (1);
@@ -34,19 +33,19 @@ static size_t	ft_power(int base, int exp)
 	return (ans);
 }
 
-int	get_digits(size_t nbr, int base)
+static int	get_digits(t_ull nb, int b)
 {
 	int	dgt;
 
-	if (!nbr)
+	if (!nb)
 		return (1);
 	dgt = 0;
-	while (!(ft_power(base, dgt) <= nbr && ft_power(base, dgt + 1) > nbr))
+	while (dgt < 20 && !(ft_power(b, dgt) <= nb && ft_power(b, dgt + 1) > nb))
 		dgt++;
 	return (dgt + 1);
 }
 
-void	ft_ultoa_base_rec(size_t nb, char *base, size_t length, char *s)
+static void	ft_ultoa_base_rec(t_ull nb, char *base, t_ull length, char *s)
 {
 	if (nb > length - 1)
 		ft_ultoa_base_rec(nb / length, base, length, s);
@@ -55,15 +54,15 @@ void	ft_ultoa_base_rec(size_t nb, char *base, size_t length, char *s)
 	*s = base[nb % length];
 }
 
-char	*ft_ultoa_base(size_t nbr, char *base)
+static char	*ft_ultoa_base(t_ull nbr, char *base)
 {
-	int		i;
-	char	*s;
-	int		len;
+	int			i;
+	char		*s;
+	t_ull		len;
 
 	if (!base)
 		return (NULL);
-	len = ft_strlen(base);
+	len = (t_ull) ft_strlen(base);
 	i = get_digits(nbr, len);
 	s = ft_calloc(i + 1, sizeof(char));
 	if (!s)
@@ -81,8 +80,7 @@ int	ft_printf(char const *fmt, ...)
 	size_t	count_perc;
 	int		dc;
 	char	*s;
-	void	*p;
-	size_t	pux;
+	t_ull	pux;
 
 	va_start(ap, fmt);
 	i = 0;
@@ -98,6 +96,7 @@ int	ft_printf(char const *fmt, ...)
 			{
 				dc = (char) va_arg(ap, int);
 				write(1, &dc, 1);
+				j++;
 			}
 			else if (fmt[i] == 's')
 			{
@@ -115,12 +114,20 @@ int	ft_printf(char const *fmt, ...)
 			}
 			else if (fmt[i] == 'p')
 			{
-				p = va_arg(ap, void *);
-				s = ft_ultoa_base((size_t) & p, ft_strdup("0123456789abcdef"));
-				write(1, "0x", 2);
-				write(1, s, ft_strlen(s));
-				j += ft_strlen(s);
-				free(s);
+				pux = (t_ull) va_arg(ap, void *);
+				if (pux)
+				{
+					s = ft_ultoa_base(pux, ft_strdup("0123456789abcdef"));
+					write(1, "0x", 2);
+					write(1, s, ft_strlen(s));
+					j += ft_strlen(s) + 2;
+					free(s);
+				}
+				else
+				{
+					write(1, "(nil)", 5);
+					j += 5;
+				}
 			}
 			else if (fmt[i] == 'd' || fmt[i] == 'i')
 			{
@@ -166,23 +173,5 @@ int	ft_printf(char const *fmt, ...)
 			write(1, fmt + i, 1);
 		i++;
 	}
-	return (va_end(ap), i + j - count_perc); //mine returns +10 than original
-}
-
-int	main(void)
-{
-	// int				x = -42;
-	// char			*str = "hola buenos dias me presento.";
-	// char			c = 'a';
-	// unsigned int	uns = 4294967290;
-	unsigned int	retft;
-	unsigned int	ret;
-
-	//retft = ft_printf("ptr: %p\nstr: %s\nint: %d\nchar: %c\nhex: %x\nhex cap: %X\nunsigned int: %u\n", (void *) &x, str, x, c, uns, uns, uns);
-	//ret = printf("\nptr: %p\nstr: %s\nint: %d\nchar: %c\nhex: %x\nhex cap: %X\nunsigned int: %u\n", (void *) &x, str, x, c, uns, uns, uns);
-	
-	retft = ft_printf("%s%s%s", "And ", "some", "joined");
-	ret = printf("%s%s%s", "And ", "some", "joined");
-	printf("mine= %u\noriginal= %u\n", retft, ret);
-	return (0);
+	return (va_end(ap), i + j - count_perc);
 }
