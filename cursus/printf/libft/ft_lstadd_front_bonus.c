@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 17:01:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/07 17:07:57 by ramo-cou         ###   ########.fr       */
+/*   Created: 2025/10/03 10:36:52 by ramo-cou          #+#    #+#             */
+/*   Updated: 2025/10/06 18:14:56 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
-# include <stdarg.h>
-# include "libft.h"
+#include "libft.h"
 
-int	ft_printf(char const *, ...);
-
-#endif
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}

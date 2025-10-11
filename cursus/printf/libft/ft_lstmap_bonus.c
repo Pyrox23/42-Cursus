@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/04 13:09:19 by ramo-cou          #+#    #+#             */
+/*   Updated: 2025/10/08 20:06:23 by ramo-cou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*root;
+	t_list	*node;
+	int		stop;
+	void	*tmp;
+
+	if (!lst || !f || !del)
+		return (NULL);
+	stop = 0;
+	root = NULL;
+	while (lst && !stop)
+	{
+		tmp = f(lst->content);
+		node = ft_lstnew(tmp);
+		ft_lstadd_back(&root, node);
+		if (!node || !node->content)
+		{
+			if (tmp)
+				del(tmp);
+			stop = 1;
+			ft_lstclear(&root, del);
+		}
+		lst = lst->next;
+	}
+	return (root);
+}
