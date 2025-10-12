@@ -1,6 +1,8 @@
 NAME = printf.a
 
-SRC = ft_printf.c
+SRC = ft_printf.c \
+		ft_cases.c \
+		ft_ultoa_base.c
 
 # SRC_BONUS = ft_lstadd_back_bonus.c \
 			ft_lstadd_front_bonus.c \
@@ -37,3 +39,5 @@ fclean: clean
 re: fclean all
 
 bonus: $(NAME)
+
+.PHONY: bonus re fclean clean all

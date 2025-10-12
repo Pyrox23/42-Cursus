@@ -34,7 +34,9 @@ SRCS = ft_atoi.o \
 		ft_substr.o \
 		ft_tolower.o \
 		ft_toupper.o \
-		ft_printf.o
+		ft_printf.o \
+		ft_cases.o \
+		ft_ultoa_base.o
 
 SRCS_BONUS = ft_lstadd_back_bonus.o \
 			ft_lstadd_front_bonus.o \
@@ -46,38 +48,46 @@ SRCS_BONUS = ft_lstadd_back_bonus.o \
 			ft_lstnew_bonus.o \
 			ft_lstsize_bonus.o
 
+OBJ = libft/libft.a \
+		printf/printf.a
+
 SRC1 = libft
 
 SRC2 = printf
 
+ifeq ($(BONUS),1)
+	SRCS += $(SRCS_BONUS)
+endif
+
 all: $(NAME)
 
-$(NAME):
-	$(MAKE) -C $(SRC1)
-	$(MAKE) -C $(SRC2)
+$(NAME): $(OBJ)
 	+mkdir tmp
 	cd tmp && ar x ../$(SRC1)/libft.a
 	cd tmp && ar x ../$(SRC2)/printf.a
 	cd tmp && ar rcs ../libftprintf.a $(SRCS)
 	+rm -rf tmp
 
+libft/libft.a:
+	$(MAKE) -C $(SRC1)
+
+printf/printf.a:
+	$(MAKE) -C $(SRC2)
+
 clean:
 	$(MAKE) -C $(SRC1) clean
 	$(MAKE) -C $(SRC2) clean
 
-fclean: clean
+fclean:
 	$(MAKE) -C $(SRC1) fclean
 	$(MAKE) -C $(SRC2) fclean
 	rm -f $(NAME)
 
 re: fclean all
 
-bonus: 
+bonus:
 	$(MAKE) -C $(SRC1) bonus
 	$(MAKE) -C $(SRC2) bonus
-	rm -f $(NAME)
-	+mkdir tmp
-	cd tmp && ar x ../$(SRC1)/libft.a
-	cd tmp && ar x ../$(SRC2)/printf.a
-	cd tmp && ar rcs ../libftprintf.a $(SRCS) $(SRCS_BONUS)
-	+rm -rf tmp
+	$(MAKE) BONUS=1
+
+.PHONY: bonus re fclean clean all
