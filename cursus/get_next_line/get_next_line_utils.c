@@ -6,7 +6,93 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:11:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/12 20:11:26 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/14 22:43:14 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*ls;
+
+	i = 0;
+	ls = (char *) s;
+	while (i < n)
+	{
+		ls[i] = 0;
+		i++;
+	}
+}
+
+size_t	ft_find(char *str, size_t n)
+{
+	size_t	i;
+
+	if (!n)
+		return (0);
+	i = 0;
+	while (str[i] != '\n' && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return (i + 1);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
+
+char	*ft_memmove(char *dest, char *src, size_t len)
+{
+	size_t			i;
+
+	i = 0;
+	if (src > dest)
+	{
+		while (++i < len + 1)
+			dest[i - 1] = src[i - 1];
+	}
+	else
+	{
+		while (i < len)
+		{
+			dest[len - i - 1] = src[len - i - 1];
+			i++;
+		}
+	}
+	return ((char *) dest);
+}
+
+char	*merge(char *ret, char *dest, char *buff, size_t nbytes)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (dest[i])
+	{
+		ret[i] = dest[i];
+		i++;
+	}
+	while (j <= nbytes)
+		ret[i++] = buff[j++];
+	ret[i] = 0;
+	free(dest);
+	if (buff[j])
+	{
+		ft_memmove(buff, buff + j, SIZE - nbytes);
+		ft_bzero(buff + SIZE - j, nbytes);
+	}
+	else
+		ft_bzero(buff, SIZE);
+	return (ret);
+}
