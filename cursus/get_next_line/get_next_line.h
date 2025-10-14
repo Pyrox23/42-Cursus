@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:11:25 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/14 22:38:52 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/14 23:55:31 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # endif
 # include <stdlib.h>
 # include <unistd.h>
-#include <stdio.h>
 
 typedef unsigned char	t_uc;
 

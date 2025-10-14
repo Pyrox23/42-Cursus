@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:11:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/14 22:43:14 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/14 23:50:17 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	ft_find(char *str, size_t n)
 	if (!n)
 		return (0);
 	i = 0;
-	while (str[i] != '\n' && i < n)
+	while (i < n && str[i] != '\n')
 		i++;
 	if (i == n)
 		return (0);
@@ -69,30 +69,4 @@ char	*ft_memmove(char *dest, char *src, size_t len)
 		}
 	}
 	return ((char *) dest);
-}
-
-char	*merge(char *ret, char *dest, char *buff, size_t nbytes)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (dest[i])
-	{
-		ret[i] = dest[i];
-		i++;
-	}
-	while (j <= nbytes)
-		ret[i++] = buff[j++];
-	ret[i] = 0;
-	free(dest);
-	if (buff[j])
-	{
-		ft_memmove(buff, buff + j, SIZE - nbytes);
-		ft_bzero(buff + SIZE - j, nbytes);
-	}
-	else
-		ft_bzero(buff, SIZE);
-	return (ret);
 }

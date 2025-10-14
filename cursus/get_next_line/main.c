@@ -6,7 +6,7 @@ int	main(void)
 {
 	char	*line;
 	int		fd;
-	int		i = 1;
+	//int		i = 1;
 	int		stop;
 
 	fd = open("test.txt", O_RDONLY);
@@ -17,12 +17,13 @@ int	main(void)
 		if (!line)
 		{
 			stop = 1;
-			printf("linea %d: EOF\n", i++);
+			//printf("linea %d: EOF\n", i++);
+			printf("EOF\n");
 		}
 		else
 		{
-			printf("linea %d: %s", i++, line);
-			//printf("%s", line);
+			//printf("linea %d: %s", i++, line);
+			printf("%s", line);
 			free(line);
 		}
 	}
