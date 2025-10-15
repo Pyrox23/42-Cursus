@@ -9,7 +9,7 @@ int	main(void)
 	//int		i = 1;
 	int		stop;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("test1.txt", O_RDONLY);
 	stop = 0;
 	while (!stop)
 	{

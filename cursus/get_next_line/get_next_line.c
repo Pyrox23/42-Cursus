@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:11:21 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/14 23:56:08 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/15 20:20:21 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,36 @@ char	*ft_append(char *dest, char *buff, size_t nbytes)
 	return (merge(ret, dest, buff, nbytes));
 }
 
+char	*failed_read(char *res)
+{
+	if (res)
+		free(res);
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*res;
 	long long	bytes;
-	size_t		eol;
+	size_t		nl;
 	static char	buff[SIZE] = "";
 
-	bytes = 1;
-	eol = 0;
+	bytes = SIZE;
+	nl = 0;
 	res = NULL;
-	while (bytes > 0 && !eol)
+	while (bytes > 0 && !nl)
 	{
-		eol = ft_find(buff, bytes);
-		if (!eol)
+		nl = ft_find(buff, bytes);
+		if (!nl)
 		{
 			if (buff[0])
-				res = ft_append(res, buff, SIZE);
+				res = ft_append(res, buff, ft_strlen(buff));
 			bytes = read(fd, buff, SIZE);
+			if (bytes == -1 && res)
+				res = failed_read(res);
 		}
-		else if (bytes)
-			res = ft_append(res, buff, eol);
+		else if (bytes > 0)
+			res = ft_append(res, buff, nl);
 	}
 	return (res);
 }
