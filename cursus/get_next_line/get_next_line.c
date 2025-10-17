@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:11:21 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/15 20:20:21 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/17 12:55:52 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*merge(char *ret, char *dest, char *buff, size_t nbytes)
 	ft_memmove(ret + i, buff, nbytes);
 	ret[i + nbytes] = 0;
 	free(dest);
-	if (nbytes != SIZE)
+	if (nbytes != BUFFER_SIZE)
 	{
-		ft_memmove(buff, buff + nbytes, SIZE - nbytes);
-		ft_bzero(buff + SIZE - nbytes, nbytes);
+		ft_memmove(buff, buff + nbytes, BUFFER_SIZE - nbytes);
+		ft_bzero(buff + BUFFER_SIZE - nbytes, nbytes);
 	}
 	else
 		ft_bzero(buff, nbytes);
@@ -44,10 +44,10 @@ char	*ft_append(char *dest, char *buff, size_t nbytes)
 	{
 		ret = (char *) malloc((nbytes + 1) * sizeof(char));
 		ft_memmove(ret, buff, nbytes);
-		if (nbytes != SIZE)
+		if (nbytes != BUFFER_SIZE)
 		{
-			ft_memmove(buff, buff + nbytes, SIZE - nbytes);
-			ft_bzero(buff + SIZE - nbytes, nbytes);
+			ft_memmove(buff, buff + nbytes, BUFFER_SIZE - nbytes);
+			ft_bzero(buff + BUFFER_SIZE - nbytes, nbytes);
 		}
 		else
 			ft_bzero(buff, nbytes);
@@ -71,9 +71,9 @@ char	*get_next_line(int fd)
 	char		*res;
 	long long	bytes;
 	size_t		nl;
-	static char	buff[SIZE] = "";
+	static char	buff[BUFFER_SIZE] = "";
 
-	bytes = SIZE;
+	bytes = BUFFER_SIZE;
 	nl = 0;
 	res = NULL;
 	while (bytes > 0 && !nl)
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 		{
 			if (buff[0])
 				res = ft_append(res, buff, ft_strlen(buff));
-			bytes = read(fd, buff, SIZE);
+			bytes = read(fd, buff, BUFFER_SIZE);
 			if (bytes == -1 && res)
 				res = failed_read(res);
 		}
