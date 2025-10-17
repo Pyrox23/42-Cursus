@@ -23,7 +23,7 @@ int	main(void)
 		else
 		{
 			//printf("linea %d: %s", i++, line);
-			printf("%s", line);
+			//printf("%s", line);
 			free(line);
 		}
 	}
