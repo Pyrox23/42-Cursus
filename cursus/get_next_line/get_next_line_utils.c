@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:11:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/14 23:50:17 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/18 20:22:11 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ char	*ft_memmove(char *dest, char *src, size_t len)
 	i = 0;
 	if (src > dest)
 	{
-		while (++i < len + 1)
-			dest[i - 1] = src[i - 1];
+		while (i < len)
+		{
+			dest[i] = src[i];
+			i++;
+		}
 	}
 	else
 	{
