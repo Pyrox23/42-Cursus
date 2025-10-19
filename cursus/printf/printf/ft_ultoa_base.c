@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 19:39:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/12 19:50:19 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/19 18:24:08 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,18 @@ static int	get_digits(t_ull nb, int b)
 	return (dgt + 1);
 }
 
-static void	ft_ultoa_base_rec(t_ull nb, char *base, t_ull length, char *s)
+static void	ft_ultoa_base_rec(t_ull nb, char *base, t_ull length, char **s)
 {
 	if (nb > length - 1)
 		ft_ultoa_base_rec(nb / length, base, length, s);
-	while (*s)
-		s++;
-	*s = base[nb % length];
+	*(*s)++ = base[nb % length];
 }
 
 char	*ft_ultoa_base(t_ull nbr, char *base)
 {
 	int			i;
 	char		*s;
+	char		*ptr;
 	t_ull		len;
 
 	if (!base)
@@ -61,7 +60,8 @@ char	*ft_ultoa_base(t_ull nbr, char *base)
 	i = get_digits(nbr, len);
 	s = ft_calloc(i + 1, sizeof(char));
 	if (!s)
-		return (free(base), NULL);
-	ft_ultoa_base_rec(nbr, base, len, s);
+		return (NULL);
+	ptr = s;
+	ft_ultoa_base_rec(nbr, base, len, &ptr);
 	return (s);
 }
