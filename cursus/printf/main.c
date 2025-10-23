@@ -1,18 +1,18 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-
-// TEST(6, print(" %p %p ", LONG_MIN, LONG_MAX));
-// 32:     TEST(8, print(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
-// 33:     TEST(9, print(" %p %p ", 0, 0));
 int	main(void)
 {
-	unsigned int retft, ret;
+	int retft, ret;
 
-	// retft = ft_printf(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
-	// ret = printf(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
+	retft = ft_printf("%d, %d\n", -500, 500);
+	ret = printf("%d, %d\n", -500, 500);
+	printf("\nmine= %d\noriginal= %d\n", retft, ret);
 	retft = ft_printf("%r");
 	ret = printf("%r");
-	printf("\nmine= %u\noriginal= %u\n", retft, ret);
+	printf("\nmine= %d\noriginal= %d\n", retft, ret);
+	retft = ft_printf("%");
+	ret = printf("%");
+	printf("\nmine= %d\noriginal= %d\n", retft, ret);
 	return (0);
 }

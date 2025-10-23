@@ -6,62 +6,52 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 19:40:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/23 20:21:19 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/23 23:28:12 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	case_s(char *s)
+int	print_nbr(int n)
+{
+	int	count;
+
+	count = 1;
+	if (n < 0)
+	{
+		if (n == -__INT_MAX__ - 1)
+			return (case_s("-2147483648"));
+		count += case_c('-');
+		n *= -1;
+	}
+	if (n > 9)
+		count += print_nbr(n / 10);
+	case_c(n % 10 + '0');
+	return (count);
+}
+
+size_t	case_s(char *s)
 {
 	size_t	len;
 
 	if (!s)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+		return (case_s("(null)"));
 	len = ft_strlen(s);
 	write(1, s, len);
 	return (len);
 }
 
-static size_t	case_p(t_ull ptr, int *fl)
+size_t	case_p(size_t ptr)
 {
-	size_t	len;
-	char	*s;
-
 	if (!ptr)
-	{
-		write(1, "(nil)", 5);
-		return (5);
-	}
-	s = ft_ultoa_base(ptr, "0123456789abcdef");
-	if (!s)
-		return (*fl = 1, 0);
-	len = ft_strlen(s);
-	write(1, "0x", 2);
-	write(1, s, len);
-	free(s);
-	return (len + 2);
+		return (case_s("(nil)"));
+	return (case_s("0x") + ft_ultoa_base(ptr, HEX_LOW));
 }
 
-static size_t	case_di(int nb, int *fl)
+size_t	case_c(char c)
 {
-	size_t	len;
-	char	*s;
-
-	s = ft_itoa(nb);
-	if (!s)
-		return (*fl = 1, 0);
-	len = ft_strlen(s);
-	write(1, s, len);
-	return (len);
-}
-
-static size_t	case_ux(t_ull nb, char *base, int *fl)
-{
-	return (ft_ultoa_base(nb, base));
+	write(1, &c, 1);
+	return (1);
 }
 
 int	check_case(va_list ap, char flag, size_t *bw)
@@ -74,18 +64,18 @@ int	check_case(va_list ap, char flag, size_t *bw)
 	else if (flag == 's')
 		*bw += case_s(va_arg(ap, char *));
 	else if (flag == 'p')
-		*bw += case_p((t_ull) va_arg(ap, void *), &fl);
+		*bw += case_p((size_t) va_arg(ap, void *));
 	else if (flag == 'd' || flag == 'i')
-		*bw += case_di(va_arg(ap, int), &fl);
+		*bw += print_nbr(va_arg(ap, int));
 	else if (flag == 'u')
-		*bw += case_ux(va_arg(ap, t_ui), "0123456789", &fl);
+		*bw += ft_ultoa_base(va_arg(ap, unsigned int), BASE_10);
 	else if (flag == 'x')
-		*bw += case_ux(va_arg(ap, t_ui), "0123456789abcdef", &fl);
+		*bw += ft_ultoa_base(va_arg(ap, unsigned int), HEX_LOW);
 	else if (flag == 'X')
-		*bw += case_ux(va_arg(ap, t_ui), "0123456789ABCDEF", &fl);
+		*bw += ft_ultoa_base(va_arg(ap, unsigned int), HEX_UP);
 	else if (flag == '%')
 		*bw += case_c('%');
 	else
-		fl = -1;
+		fl = 1;
 	return (fl);
 }

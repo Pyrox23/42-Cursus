@@ -2,9 +2,7 @@ NAME = libftprintf.a
 
 SRC = ft_printf.c \
 		ft_cases.c \
-		ft_ultoa_base.c \
-		ft_itoa.c \
-		ft_strlen.c
+		ft_ultoa_base.c
 
 OBJ = $(SRC:.c=.o)
 

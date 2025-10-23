@@ -6,27 +6,20 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:20:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/20 19:08:57 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/23 23:37:39 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// conversion();
-// flags/precision(#+. );
-// width(flags 0 y -);
-// return to print at main func
-
-size_t	case_c(char c)
+size_t	ft_strlen(const char *s)
 {
-	write(1, &c, 1);
-	return (1);
-}
+	size_t	len;
 
-int	write_char(char c)
-{
-	write(1, &c, 1);
-	return (1);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }
 
 int	ft_printf(char const *fmt, ...)
@@ -45,13 +38,13 @@ int	ft_printf(char const *fmt, ...)
 		{
 			i++;
 			flag = check_case(ap, fmt[i], &bw);
-			if (flag == 1)
+			if (flag && fmt[i])
+				bw += case_c(fmt[--i]);
+			else if (flag)
 				return (va_end(ap), -1);
-			else if (flag == -1)
-				bw += write_char(fmt[--i]);
 		}
 		else
-			bw += write_char(fmt[i]);
+			bw += case_c(fmt[i]);
 		i++;
 	}
 	return (va_end(ap), bw);
