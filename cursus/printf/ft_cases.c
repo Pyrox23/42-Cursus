@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 19:40:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/20 18:47:53 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/23 20:21:19 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,12 @@ static size_t	case_di(int nb, int *fl)
 		return (*fl = 1, 0);
 	len = ft_strlen(s);
 	write(1, s, len);
-	free(s);
 	return (len);
 }
 
 static size_t	case_ux(t_ull nb, char *base, int *fl)
 {
-	size_t	len;
-	char	*s;
-
-	s = ft_ultoa_base(nb, base);
-	if (!s)
-		return (*fl = 1, 0);
-	len = ft_strlen(s);
-	write(1, s, len);
-	free(s);
-	return (len);
+	return (ft_ultoa_base(nb, base));
 }
 
 int	check_case(va_list ap, char flag, size_t *bw)

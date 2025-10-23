@@ -6,11 +6,11 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 20:58:15 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/02 22:10:03 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/23 19:26:56 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static long	ft_power(int base, int exp)
 {
