@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 19:40:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/19 18:23:30 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:47:53 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int	check_case(va_list ap, char flag, size_t *bw)
 	else if (flag == '%')
 		*bw += case_c('%');
 	else
-		fl = 1;
+		fl = -1;
 	return (fl);
 }

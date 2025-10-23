@@ -9,8 +9,10 @@ int	main(void)
 {
 	unsigned int retft, ret;
 
-	retft = ft_printf(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
-	ret = printf(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
+	// retft = ft_printf(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
+	// ret = printf(" %p %p ", 18446744073709551615ULL, -18446744073709551615ULL);
+	retft = ft_printf("%r");
+	ret = printf("%r");
 	printf("\nmine= %u\noriginal= %u\n", retft, ret);
 	return (0);
 }
