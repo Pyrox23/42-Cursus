@@ -3,7 +3,9 @@ NAME = push_swap
 SRC = main.c \
 		check_input.c \
 		sort_stack.c \
-		push_swap_utils.c
+		push_swap_utils.c \
+		operations.c \
+		transfer_functions.c
 
 OBJ = $(SRC:.c=.o)
 
