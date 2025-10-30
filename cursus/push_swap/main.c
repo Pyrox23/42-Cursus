@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/29 00:02:47 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/30 13:32:08 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(int ac, char **av)
 {
 	int	*s_in;
 	int	*s_tmp;
-	int	i;
 
 	if (ac <= 1)
 		return (0);
@@ -46,9 +45,6 @@ int	main(int ac, char **av)
 		stop_program(NULL, NULL, EXIT_FAILURE);
 	if (ac == 1)
 		return (0);
-	i = 0;
-	while (i < ac)
-		printf("%d\n", s_in[i++]);
 	s_tmp = (int *) malloc(ac * sizeof(int));
 	if (!s_tmp)
 		stop_program(s_in, NULL, EXIT_FAILURE);

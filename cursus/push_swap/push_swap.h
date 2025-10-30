@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:41 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/29 00:05:12 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/30 12:54:21 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 #include <stdio.h>
 //# include "ft_printf.h"
 //# include "libft.h"
+
+typedef struct s_radix
+{
+	int	lo;
+	int	hi;
+	int	iters;
+}	t_radix;
 
 void	sort_stack(int *s_in, int *s_tmp, int size);
 int		*check_input(char **ls, int size);
