@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 19:07:02 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/30 21:27:13 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:57:07 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	sort_stack(int *s_in, int *s_tmp, int size)
 
 	init_data(s_in, s_tmp, &data, size);
 	get_iterations(&data);
-	while (data.iters && !is_sorted(data, data->stk_a, 0))
+	while (data.iters && !is_sorted(&data, data.stk_a, 0))
 	{
 		if (data.lo < 0)
 		{
@@ -97,6 +97,8 @@ void	sort_stack(int *s_in, int *s_tmp, int size)
 			transfer_to_tmp(&data);
 		data.iters--;
 	}
+	while (!is_sorted(&data, data.stk_b, 1));
+		//sort_b
 	push_back(&data);
 	stop_program(s_in, s_tmp, EXIT_SUCCESS);
 }

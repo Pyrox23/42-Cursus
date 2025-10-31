@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:41 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/30 21:27:03 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/10/31 18:27:06 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	push(t_stacks *data, int stack);
 void	rotate(t_stacks *data, int stack, char *print);
 void	reverse_rotate(t_stacks *data, int stack, char *print);
 void	push_back(t_stacks *data);
+void	check_rr(t_stacks *dt);
+void	check_ss(t_stacks *dt);
 
 /* void	print_stk(t_stacks *data)
 {
