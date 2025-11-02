@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 19:04:17 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/30 21:22:52 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/02 22:27:02 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	swap(t_stacks *data, int stack, char *print)
 		write(1, print, ft_strlen(print));
 }
 
-void	push(t_stacks *data, int stack)
+void	push(t_stacks *data, int stack, int print)
 {
 	int	pop;
 
@@ -47,9 +47,9 @@ void	push(t_stacks *data, int stack)
 		data->stk_a[data->top_a++] = 0;
 		data->stk_b[--data->top_b] = pop;
 	}
-	if (stack == 1)
+	if (stack == 1 && print)
 		write(1, "pa\n", 3);
-	else if (stack == 0)
+	else if (stack == 0 && print)
 		write(1, "pb\n", 3);
 }
 

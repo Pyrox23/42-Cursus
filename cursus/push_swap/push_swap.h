@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:41 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/31 18:27:06 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:09:52 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,17 @@ int		ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *s);
 void	stop_program(int *s_in, int *s_tmp, int ext_val);
 void	swap(t_stacks *data, int stack, char *print);
-void	push(t_stacks *data, int stack);
+void	push(t_stacks *data, int stack, int print);
 void	rotate(t_stacks *data, int stack, char *print);
 void	reverse_rotate(t_stacks *data, int stack, char *print);
-void	push_back(t_stacks *data);
 void	check_rr(t_stacks *dt);
 void	check_ss(t_stacks *dt);
+void	transfer_to_tmp_neg(t_stacks *dt);
+void	transfer_to_tmp(t_stacks *dt);
+int		is_sorted(t_stacks *data, int *stack, int mode);
+int		check_rotation_type(t_stacks *dt, int *stack, int top);
+int		check_top(t_stacks *dt, int *stack, int top, int mode);
+void	print_stk(t_stacks *data);
 
 /* void	print_stk(t_stacks *data)
 {

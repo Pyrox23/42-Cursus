@@ -5,7 +5,9 @@ SRC = main.c \
 		sort_stack.c \
 		push_swap_utils.c \
 		operations.c \
-		transfer_functions.c
+		transfer_functions.c \
+		try_rotations.c \
+		
 
 OBJ = $(SRC:.c=.o)
 
