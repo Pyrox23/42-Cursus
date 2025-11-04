@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/04 20:42:29 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/04 23:22:04 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_signal(void)
 	sigaddset(&act.sa_mask, SIGUSR2);
 	act.sa_handler = add_bit;
 	act.sa_flags = 0;
-	act.sa_flags |= SA_RESTART;
+	act.sa_flags |= SA_SIGINFO;
 	act.sa_restorer = NULL;
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);

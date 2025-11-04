@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:55:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/04 20:43:25 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/05 00:29:52 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	send_byte(unsigned char byte, int pid)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(250); //Puede que haya que subir este numero, con mucho texto se pierden señales, no se si hay otra manera de arreglarlo
+		usleep(800);
 		i--;
 	}
 }
