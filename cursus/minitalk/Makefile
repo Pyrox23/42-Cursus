@@ -7,23 +7,15 @@ SRC = ft_cases.c \
 		minitalk_utils.c \
 		check_input.c
 
-# SRC_BONUS = ft_lstadd_back_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstclear_bonus.c \
-			ft_lstdelone_bonus.c \
-			ft_lstiter_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstmap_bonus.c \
-			ft_lstnew_bonus.c \
-			ft_lstsize_bonus.c
-
 OBJ = $(SRC:.c=.o)
-
-# OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 SERVER_M = server.o
 
+SERVER_M_BONUS = server_bonus.o
+
 CLIENT_M = client.o
+
+CLIENT_M_BONUS = client_bonus.o
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -41,12 +33,15 @@ $(CLIENT): $(OBJ) $(CLIENT_M)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(SERVER_M) $(CLIENT_M)
+	rm -f $(OBJ) $(SERVER_M) $(CLIENT_M) $(SERVER_M_BONUS) $(CLIENT_M_BONUS)
 
 fclean: clean
-	rm -f $(NAME) $(CLIENT)
+	rm -f $(NAME) $(CLIENT) 
 
 re: fclean all
 
-# bonus: $(OBJ_BONUS)
-#	ar rcs $(NAME) $(OBJ_BONUS)
+bonus: $(OBJ) $(SERVER_M_BONUS) $(CLIENT_M_BONUS)
+	$(CC) $(CFLAGS) $(OBJ) $(SERVER_M_BONUS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(CLIENT_M_BONUS) -o $(CLIENT)
+
+.PHONY: bonus re clean fclean all
