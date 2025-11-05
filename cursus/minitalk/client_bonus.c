@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:55:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/05 17:34:58 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:51:37 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	send_bit(int sig)
 {
 	if (sig == SIGUSR1)
 		write(1, "ACK\n", 4);
-	usleep(400);
+	usleep(200);
 	if (!g_data.moves)
 	{
 		g_data.moves = 8;

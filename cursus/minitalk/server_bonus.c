@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/05 17:35:00 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/05 22:09:27 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	manage_str(void)
 void	add_bit(int sig, siginfo_t *info, void *content)
 {
 	g_data.sig = 0;
-	usleep(400);
+	usleep(200);
 	if (g_data.pid != info->si_pid && (content || !content))
 		g_data.pid = info->si_pid;
 	if (sig == SIGUSR1)

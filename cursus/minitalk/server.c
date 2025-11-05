@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/04 23:22:04 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:09:53 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	manage_str(void)
 	g_data.dummy++;
 	if (!g_data.c)
 	{
-		ft_printf("%s", g_data.str);
+		ft_printf("%s\n", g_data.str);
 		g_data.dummy = g_data.str;
 	}
 	if ((g_data.dummy - g_data.str) >= g_data.len && ft_realloc(&g_data))
@@ -38,7 +38,6 @@ void	manage_str(void)
 	g_data.moves = 0;
 }
 
-//sa_siginfo sirve para saber quien (PID) envio la señal
 void	add_bit(int sig)
 {
 	if (sig == SIGUSR1)
