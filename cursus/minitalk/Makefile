@@ -4,8 +4,7 @@ CLIENT = client
 SRC = ft_cases.c \
 		ft_printf.c \
 		ft_ultoa_base.c \
-		minitalk_utils.c \
-		check_input.c
+		minitalk_utils.c
 
 OBJ = $(SRC:.c=.o)
 

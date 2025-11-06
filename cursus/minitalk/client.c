@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:55:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/05 00:30:32 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:30:32 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ void	send_byte(unsigned char byte, int pid)
 int	main(int ac, char **av)
 {
 	int	server_pid;
-	int	flag;
 	int	i;
 
 	if (ac != 3)
-		return (write(2, "Incorrect quantity of parameters\n", 33), 1);
-	flag = 0;
-	server_pid = check_input(av[1], &flag);
-	if (flag)
-		return (write(2, "PID specified is not an int\n", 28), 1);
+		return (write(2, "Use of client: ./client <PID> <Message>\n", 40), 1);
+	server_pid = ft_atoi(av[1]);
+	if (server_pid <= 0)
+		return (write(2, "PID specified is not valid (<= 0)\n", 34), 1);
 	i = 0;
 	while (av[2][i])
 		send_byte(av[2][i++], server_pid);

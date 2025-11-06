@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:55:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/05 17:51:37 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:29:49 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	end_program_client(int sig)
 		write(1, "ACK\n", 4);
 	if (g_data.dummy == g_data.str + g_data.len)
 	{
-		write(1, "Full string was sent correctly\n", 31);
+		write(1, "Message sent!\n", 14);
 		exit(EXIT_SUCCESS);
 	}
 	write(2, "Server terminated connection early\n", 35);
@@ -70,25 +70,25 @@ void	init_signal(void)
 
 int	main(int ac, char **av)
 {
-	int	flag;
+	int	conn;
 
 	if (ac != 3)
-		return (write(2, "Incorrect quantity of parameters\n", 33), 1);
-	flag = 0;
-	g_data.pid = check_input(av[1], &flag);
-	if (flag)
-		return (write(2, "PID specified is not an int\n", 28), 1);
+		return (write(2, "Use of client: ./client <PID> <Message>\n", 40), 1);
+	g_data.pid = ft_atoi(av[1]);
+	if (g_data.pid <= 0)
+		return (write(2, "PID specified is not valid (<= 0)\n", 34), 1);
 	init_signal();
 	g_data.str = av[2];
 	g_data.dummy = g_data.str;
 	g_data.len = ft_strlen(av[2]);
-	flag = 1;
+	conn = 1;
+	ft_printf("Client started!\nPID: %d\n", getpid());
 	send_bit(1);
-	while (flag)
+	while (conn)
 	{
 		if (g_data.sig)
 			kill(g_data.pid, g_data.sig);
-		flag = usleep(2000000);
+		conn = usleep(2000000);
 	}
 	write(2, "Error: No response from server\n", 31);
 	return (0);

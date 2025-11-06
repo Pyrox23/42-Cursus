@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:07:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/04 20:33:38 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/06 01:25:31 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,46 @@ int	ft_realloc(t_minitalk *g_data)
 	g_data->dummy = g_data->str + g_data->len;
 	g_data->len *= 2;
 	return (0);
+}
+
+static int	atoi_rec(const char *str, int digit)
+{
+	int	nbr;
+	int	i;
+
+	if (digit == 0)
+		return (0);
+	i = 0;
+	nbr = *str - '0';
+	while (i < digit - 1)
+	{
+		nbr *= 10;
+		i++;
+	}
+	return (nbr + atoi_rec(++str, --digit));
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	dgt;
+	int	nbr;
+	int	pos;
+
+	dgt = 0;
+	pos = 0;
+	nbr = 1;
+	while (nptr[pos] == ' ' || (nptr[pos] >= '\t' && nptr[pos] <= '\r'))
+		pos++;
+	if (nptr[pos] == '-' || nptr[pos] == '+')
+	{
+		if (nptr[pos] == '-')
+			nbr = -1;
+		pos++;
+	}
+	while (nptr[pos + dgt] <= '9' && nptr[pos + dgt] >= '0')
+		dgt++;
+	nbr *= atoi_rec(nptr + pos, dgt);
+	return (nbr);
 }
 
 void	*ft_memmove(void *dest, const void *src, size_t len)
