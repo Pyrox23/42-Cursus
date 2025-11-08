@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 16:45:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/07 23:34:25 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:51:10 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ char	**check_args(char *file, char *command, int *fd)
 		return (perror("pipe"), NULL);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		return (perror("dup2"), NULL);
-	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		return (perror("dup2"), NULL);
 	comm_pipe(fdf, fd[1]);
+	close(fd[0]);
+	close(fd[1]);
 	close(fdf);
+	if (pipe(fd))
+		return (perror("pipe"), NULL);
 	return (args);
 }
 
@@ -55,6 +57,8 @@ int	main(int ac, char **av)
 	char	**args;
 	char	*aux;
 	int		fd[2];
+	int		stdout;
+	int		i;
 
 	pid = 0;
 	if (ac != 5)
@@ -62,10 +66,13 @@ int	main(int ac, char **av)
 	args = check_args(av[1], av[2], fd);
 	if (!args)
 		return (1);
+	stdout = dup(STDOUT_FILENO);
 	pid = fork();
 	if (!pid)
 	{
-		close(fd[1]);
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			return (perror("dup2"), 1);
+		close(fd[0]);
 		if (!ft_strchr(args[0], '/'))
 		{
 			aux = ft_strjoin("/bin/", args[0]);
@@ -75,11 +82,44 @@ int	main(int ac, char **av)
 			args[0] = aux;
 		}
 		execve(args[0], args, NULL);
+		if (dup2(stdout, STDOUT_FILENO) == -1)
+			return (perror("dup2"), 1);
 		return (perror(args[0]), 1);
 	}
 	close(fd[1]);
-	ft_printf("Waiting for %d\n", pid);
 	waitpid(pid, NULL, 0);
-	ft_printf("pass\n");
+	if (dup2(fd[0], STDIN_FILENO) == -1)
+		return (perror("dup2"), 1);
+	close(fd[0]);
+	close(open(av[4], O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
+	fd[1] = open(av[4], O_WRONLY);
+	if (!fd[1])
+		return (perror("open"), 1);
+	i = 0;
+	while (!args[i])
+		free(args[i++]);
+	free(args);
+	args = ft_split(av[3], ' ');
+	pid = fork();
+	if (!pid)
+	{
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			return (perror("dup2"), 1);
+		close(fd[0]);
+		if (!ft_strchr(args[0], '/'))
+		{
+			aux = ft_strjoin("/bin/", args[0]);
+			if (!aux)
+				return (ft_printf("ft_strjoin: %s\n", strerror(ENOMEM)), 1);
+			free(args[0]);
+			args[0] = aux;
+		}
+		execve(args[0], args, NULL);
+		if (dup2(stdout, STDOUT_FILENO) == -1)
+			return (perror("dup2"), 1);
+		return (perror(args[0]), 1);
+	}
+	close(fd[1]);
+	waitpid(pid, NULL, 0);
 	return (0);
 }
