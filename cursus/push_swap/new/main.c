@@ -6,48 +6,61 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/30 13:32:08 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/21 21:05:16 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	stop_program(int *s_in, int *s_tmp, int ext_val)
+void	stop_program(t_list *s_in, int ext_val)
 {
 	if (s_in)
-		free(s_in);
-	if (s_tmp)
-		free(s_tmp);
+		ft_lstclear(&s_in);
 	if (ext_val == EXIT_FAILURE)
 		write(2, "Error\n", 6);
 	exit(ext_val);
 }
 
-int	*init_stack(int *stack, int size)
+t_stacks	init_struct(t_list *stk_a, int size)
+{
+	t_stacks	data;
+
+	data.stk_a = stk_a;
+	data.stk_b = NULL;
+	data.size_a = size;
+	data.size_b = 0;
+	return (data);
+}
+
+int	is_sorted(int *stack, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < size)
-		stack[i++] = 0;
-	return (stack);
+	while (i < size - 1 && stack[i] < stack[i + 1])
+		i++;
+	return (i == size - 1);
 }
 
 int	main(int ac, char **av)
 {
-	int	*s_in;
-	int	*s_tmp;
+	t_list	*s_in;
+	int		size;
 
 	if (ac <= 1)
 		return (0);
-	s_in = check_input(av + 1, --ac);
-	if (!s_in)
-		stop_program(NULL, NULL, EXIT_FAILURE);
-	if (ac == 1)
+	size = --ac;
+	s_in = NULL;
+	if (check_input(av + 1, &size, &s_in, size == 1))
+		stop_program(s_in, EXIT_FAILURE);
+	if (!size)
 		return (0);
-	s_tmp = (int *) malloc(ac * sizeof(int));
-	if (!s_tmp)
-		stop_program(s_in, NULL, EXIT_FAILURE);
-	sort_stack(s_in, init_stack(s_tmp, ac), ac);
+	if (size == 1)
+		stop_program(s_in, EXIT_SUCCESS);
+	if (size <= 5)
+		s_in = tiny_sort(init_struct(s_in, size));
+	else
+		s_in = sort_stack(init_struct(s_in, size));
+	stop_program(s_in, EXIT_SUCCESS);
 	return (0);
 }

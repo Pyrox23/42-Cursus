@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:43:03 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/28 21:08:42 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/21 02:37:41 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,20 @@ static int	check_limits(char *nb)
 	return (ln--, ln > 10 || (ln == 10 && ft_strncmp(I_MIN, nb + 1, 10) < 0));
 }
 
-static int	check_duplicate(int *ls, int dup, int size)
+static int	check_duplicate(t_list *stack, int dup, int size)
 {
-	int	i;
-	int	found;
+	t_list	*node;
+	int		found;
 
+	if (!size)
+		return (0);
 	found = 0;
-	i = 0;
-	while (i < size && !found)
-		found = (ls[i++] == dup);
+	node = stack;
+	while (node->next && !found)
+	{
+		found = (node->content == dup);
+		node = node->next;
+	}
 	return (found);
 }
 
@@ -59,35 +64,49 @@ static int	str_is_int(char *str)
 	{
 		if ((str[i] == '-' || str[i] == '+') && i == 0 && str[i + 1])
 			i++;
-		err = !ft_isdigit(str[i++]);
+		err = !(str[i] >= '0' && str[i] <= '9');
+		i++;
 	}
 	if (!err)
 		return (check_limits(str));
 	return (err);
 }
 
-int	*check_input(char **ls, int size)
+int	get_length(char **ls)
 {
-	int	*stack;
-	int	i;
-	int	err;
+	int	len;
 
-	stack = (int *) malloc(size * sizeof(int));
-	if (!stack)
-		return (NULL);
-	i = 0;
+	len = 0;
+	while (ls[len])
+		len++;
+	return (len);
+}
+
+int	check_input(char **ls, int *size, t_list **stack, int split)
+{
+	int		i;
+	int		err;
+	t_list	*node;
+
+	if (split)
+		ls = ft_split(ls[0], ' ');
+	*size = get_length(ls);
+	i = -1;
 	err = 0;
-	while (i < size && !err)
+	while (++i < *size && !err)
 	{
 		err = str_is_int(ls[i]);
 		if (!err)
 		{
-			stack[i] = ft_atoi(ls[i]);
-			err = check_duplicate(stack, stack[i], i);
+			node = ft_lstnew(ft_atoi(ls[i]));
+			if (node)
+			{
+				ft_lstadd_back(stack, node);
+				err = check_duplicate(*stack, node->content, i);
+			}
+			else
+				err = 1;
 		}
-		i++;
 	}
-	if (err)
-		return (free(stack), NULL);
-	return (stack);
+	return (free_list(&ls, *size, split), err);
 }

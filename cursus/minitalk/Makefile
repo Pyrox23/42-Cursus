@@ -10,17 +10,15 @@ OBJ = $(SRC:.c=.o)
 
 SERVER_M = server.o
 
-SERVER_M_BONUS = server_bonus.o
-
 CLIENT_M = client.o
-
-CLIENT_M_BONUS = client_bonus.o
 
 CFLAGS = -Wall -Wextra -Werror
 
 CC = cc
 
 all: $(NAME) $(CLIENT)
+
+bonus: $(NAME) $(CLIENT)
 
 $(NAME): $(OBJ) $(SERVER_M)
 	$(CC) $(CFLAGS) $(OBJ) $(SERVER_M) -o $(NAME)
@@ -32,15 +30,11 @@ $(CLIENT): $(OBJ) $(CLIENT_M)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(SERVER_M) $(CLIENT_M) $(SERVER_M_BONUS) $(CLIENT_M_BONUS)
+	rm -f $(OBJ) $(SERVER_M) $(CLIENT_M)
 
 fclean: clean
 	rm -f $(NAME) $(CLIENT) 
 
 re: fclean all
-
-bonus: $(OBJ) $(SERVER_M_BONUS) $(CLIENT_M_BONUS)
-	$(CC) $(CFLAGS) $(OBJ) $(SERVER_M_BONUS) -o $(NAME)
-	$(CC) $(CFLAGS) $(OBJ) $(CLIENT_M_BONUS) -o $(CLIENT)
 
 .PHONY: bonus re clean fclean all

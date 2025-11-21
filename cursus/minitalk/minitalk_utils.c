@@ -6,113 +6,55 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:07:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/06 01:25:31 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/21 00:35:10 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	ft_realloc(t_minitalk *g_data)
-{
-	char	*aux;
-
-	aux = malloc((g_data->len * 2) * sizeof(char));
-	if (!aux)
-		return (1);
-	ft_memmove(aux, g_data->str, g_data->len);
-	free(g_data->str);
-	g_data->str = aux;
-	g_data->dummy = g_data->str + g_data->len;
-	g_data->len *= 2;
-	return (0);
-}
-
-static int	atoi_rec(const char *str, int digit)
-{
+int	ft_atoi(const char *str)
+	{
+	int	sign;
 	int	nbr;
 	int	i;
 
-	if (digit == 0)
-		return (0);
 	i = 0;
-	nbr = *str - '0';
-	while (i < digit - 1)
+	nbr = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	sign = 1;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		nbr *= 10;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	return (nbr + atoi_rec(++str, --digit));
+	while (str[i] && str[i] <= '9' && str[i] >= '0')
+		nbr = nbr * 10 + (str[i++] - '0');
+	return (nbr * sign);
 }
 
-int	ft_atoi(const char *nptr)
+void	init_signal(void (*f)(int, siginfo_t*, void*))
 {
-	int	dgt;
-	int	nbr;
-	int	pos;
+	struct sigaction	act;
 
-	dgt = 0;
-	pos = 0;
-	nbr = 1;
-	while (nptr[pos] == ' ' || (nptr[pos] >= '\t' && nptr[pos] <= '\r'))
-		pos++;
-	if (nptr[pos] == '-' || nptr[pos] == '+')
-	{
-		if (nptr[pos] == '-')
-			nbr = -1;
-		pos++;
-	}
-	while (nptr[pos + dgt] <= '9' && nptr[pos + dgt] >= '0')
-		dgt++;
-	nbr *= atoi_rec(nptr + pos, dgt);
-	return (nbr);
+	sigemptyset(&act.sa_mask);
+	sigaddset(&act.sa_mask, SIGUSR1);
+	sigaddset(&act.sa_mask, SIGUSR2);
+	act.sa_sigaction = f;
+	act.sa_flags = SA_SIGINFO;
+	act.sa_restorer = NULL;
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
 }
 
-void	*ft_memmove(void *dest, const void *src, size_t len)
+void	end_conn_server(t_minitalk *data, char *msg)
 {
-	unsigned char	*fr;
-	unsigned char	*to;
-	size_t			i;
-
-	if (!dest || !src || !len)
-		return (dest);
-	i = 0;
-	fr = (unsigned char *) src;
-	to = (unsigned char *) dest;
-	if (fr > to)
-	{
-		while (++i < len + 1)
-			to[i - 1] = fr[i - 1];
-	}
+	if (!msg)
+		ft_printf("Client %d: %s\n", data->pid, data->str);
 	else
-	{
-		while (i < len)
-		{
-			to[len - i - 1] = fr[len - i - 1];
-			i++;
-		}
-	}
-	return (dest);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	int				comp;
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
-
-	if (!n)
-		return (0);
-	comp = 0;
-	i = 0;
-	str1 = (unsigned char *) s1;
-	str2 = (unsigned char *) s2;
-	while (str1[i] && str2[i] && !comp && i < n)
-	{
-		comp = str1[i] - str2[i];
-		i++;
-	}
-	if (!comp && i < n)
-		comp = str1[i] - str2[i];
-	return (comp);
+		write(2, msg, ft_strlen(msg));
+	free(data->str);
+	data->str = NULL;
+	data->dummy = NULL;
 }

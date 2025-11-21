@@ -2,11 +2,12 @@ NAME = push_swap
 
 SRC = main.c \
 		check_input.c \
-		sort_stack.c \
 		push_swap_utils.c \
+		ft_split.c \
+		list_utils.c \
+		sort_stack.c \
 		operations.c \
-		transfer_functions.c \
-		try_rotations.c \
+		tiny_sort.c
 		
 
 OBJ = $(SRC:.c=.o)

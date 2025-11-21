@@ -6,20 +6,27 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 20:10:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/10/28 20:20:22 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:36:36 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	ft_strlen(const char *s)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	len;
+	void	*mem;
+	size_t	tsize;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	if (!nmemb || !size)
+		return (malloc(0));
+	if (nmemb > __SIZE_MAX__ / size)
+		return (NULL);
+	tsize = nmemb * size;
+	mem = malloc(tsize);
+	if (!mem)
+		return (NULL);
+	ft_memset(mem, 0, tsize);
+	return (mem);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -45,49 +52,49 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (comp);
 }
 
-int	ft_isdigit(int c)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	size_t	i;
+	char	*ls;
+
+	i = 0;
+	ls = (char *) s;
+	while (i < n)
+	{
+		ls[i] = c;
+		i++;
+	}
+	return (s);
 }
 
-static int	atoi_rec(const char *str, int digit)
+int	ft_atoi(const char *str)
 {
+	int	sign;
 	int	nbr;
 	int	i;
 
-	if (digit == 0)
-		return (0);
 	i = 0;
-	nbr = *str - '0';
-	while (i < digit - 1)
+	nbr = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	sign = 1;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		nbr *= 10;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	return (nbr + atoi_rec(++str, --digit));
+	while (str[i] && str[i] <= '9' && str[i] >= '0')
+		nbr = nbr * 10 + (str[i++] - '0');
+	return (nbr * sign);
 }
 
-int	ft_atoi(const char *nptr)
+size_t	ft_strlen(const char *s)
 {
-	int	dgt;
-	int	nbr;
-	int	pos;
+	size_t	len;
 
-	dgt = 0;
-	pos = 0;
-	nbr = 1;
-	while (nptr[pos] == ' ' || (nptr[pos] >= '\t' && nptr[pos] <= '\r'))
-		pos++;
-	if (nptr[pos] == '-' || nptr[pos] == '+')
-	{
-		if (nptr[pos] == '-')
-			nbr = -1;
-		pos++;
-	}
-	while (nptr[pos + dgt] <= '9' && nptr[pos + dgt] >= '0')
-		dgt++;
-	nbr *= atoi_rec(nptr + pos, dgt);
-	return (nbr);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }
