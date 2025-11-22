@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:52 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 16:36:40 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 01:08:07 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include "ft_printf.h"
 # define LAT 100
-# define MAX_TIMEOUT 100000
+# define MAX_TIMEOUT 500000
 
 typedef struct s_minitalk
 {
