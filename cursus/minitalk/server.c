@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 01:20:34 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:44:51 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	read_size(size_t *size, int sig, int *bit, int pid)
 {
 	usleep(LAT);
 	*size += (sig == SIGUSR1);
-	if (++(*bit) < 64)
+	if ((*bit)++ < 64)
 		*size = *size << 1;
 	kill(pid, SIGUSR1);
 }
@@ -40,7 +40,7 @@ void	add_bit(t_minitalk *data, int sig)
 			g_state = 0;
 			data->sig = SIGUSR2;
 		}
-		if ((data->dummy - data->str) >= data->len)
+		if ((size_t)(data->dummy - data->str) >= data->len)
 		{
 			end_conn_server(data, "Exceeded size sent\n");
 			g_state = 0;
@@ -89,7 +89,8 @@ int	main(void)
 {
 	int	counter;
 
-	init_signal(sig_handler_serv);
+	if (!init_signal(sig_handler_serv))
+		return (write(2, "Signal Error!\n", 15), 1);
 	counter = 0;
 	ft_printf("Server started!\nPID: %d\n", getpid());
 	while (1)

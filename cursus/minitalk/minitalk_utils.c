@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:07:53 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 00:35:10 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:44:48 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_atoi(const char *str)
 	return (nbr * sign);
 }
 
-void	init_signal(void (*f)(int, siginfo_t*, void*))
+int	init_signal(void (*f)(int, siginfo_t*, void*))
 {
 	struct sigaction	act;
 
@@ -44,8 +44,10 @@ void	init_signal(void (*f)(int, siginfo_t*, void*))
 	act.sa_sigaction = f;
 	act.sa_flags = SA_SIGINFO;
 	act.sa_restorer = NULL;
-	sigaction(SIGUSR1, &act, NULL);
-	sigaction(SIGUSR2, &act, NULL);
+	if (sigaction(SIGUSR1, &act, NULL) == -1 || sigaction(SIGUSR2, &act, NULL)
+		== -1)
+		return (0);
+	return (1);
 }
 
 void	end_conn_server(t_minitalk *data, char *msg)

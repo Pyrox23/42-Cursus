@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:55:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 01:21:32 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:45:09 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ int	main(int ac, char **av)
 	act.sa_handler = sig_handler;
 	act.sa_flags = 0;
 	act.sa_restorer = NULL;
-	sigaction(SIGUSR1, &act, NULL);
-	sigaction(SIGUSR2, &act, NULL);
+	if (sigaction(SIGUSR1, &act, NULL) == -1 || sigaction(SIGUSR2, &act, NULL)
+		== -1)
+		return (write(2, "Signal Error!\n", 15), 1);
 	data.str = av[2];
 	data.dummy = data.str;
 	data.len = ft_strlen(data.str);
