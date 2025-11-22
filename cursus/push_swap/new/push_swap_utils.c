@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 20:10:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 18:36:36 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:06:42 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,24 @@ int	ft_atoi(const char *str)
 	return (nbr * sign);
 }
 
-size_t	ft_strlen(const char *s)
+char	*trim(char *s1)
 {
-	size_t	len;
+	size_t	start;
+	size_t	end;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	start = 0;
+	if (!s1)
+		return (s1);
+	while (s1[start] && s1[start] == ' ')
+		start++;
+	end = start;
+	while (s1[end])
+		end++;
+	if (start == end)
+		return (s1[start]);
+	end--;
+	while (start != end && s1[end] == ' ')
+		end--;
+	s1[end + 1] = 0;
+	return (s1[start]);
 }

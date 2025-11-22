@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:41 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 21:04:21 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:12:01 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,13 @@ typedef struct s_stacks
 	int		size_b;
 }	t_stacks;
 
-t_list	*sort_stack(t_stacks data);
-t_list	*tiny_sort(t_stacks data);
-int		check_input(char **ls, int *size, t_list **stack, int split);
-int		ft_isdigit(int c);
+int		check_input(char **ls, int *size, t_list **stack);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *s);
-void	stop_program(t_list *s_in, int ext_val);
-void	swap(t_stacks *data, int stack);
-void	push(t_stacks *data, int stack);
-void	rotate(t_stacks *data, int stack);
-void	reverse_rotate(t_stacks *data, int stack);
-int		is_sorted(int *stack, int size);
-void	free_list(char ***arr, size_t len, int clear);
+char	*ft_strtrim(char const *s1);
+void	free_list(char ***arr, size_t len);
+int		get_length(char **ls);
 char	**ft_split(char const *s, char c);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memset(void *s, int c, size_t n);
@@ -55,6 +48,14 @@ void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst);
 t_list	*ft_lstnew(int content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*sort_stack(t_stacks data);
+t_list	*tiny_sort(t_stacks data);
+void	stop_program(t_list *s_in, int ext_val);
+void	swap(t_stacks *data, int stack);
+void	push(t_stacks *data, int stack);
+void	rotate(t_stacks *data, int stack);
+void	reverse_rotate(t_stacks *data, int stack);
+int		is_sorted(int *stack, int size);
 void	swap_dirs(int *a, int *b);
 int		*copy_stack(t_list *stack, int size);
 

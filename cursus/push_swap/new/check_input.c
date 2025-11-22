@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:43:03 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 02:37:41 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:12:08 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,23 @@ static int	str_is_int(char *str)
 	return (err);
 }
 
-int	get_length(char **ls)
-{
-	int	len;
-
-	len = 0;
-	while (ls[len])
-		len++;
-	return (len);
-}
-
-int	check_input(char **ls, int *size, t_list **stack, int split)
+int	check_input(char **ls, int *size, t_list **stack)
 {
 	int		i;
 	int		err;
 	t_list	*node;
+	char	**sp;
+	int		j;
 
-	if (split)
-		ls = ft_split(ls[0], ' ');
 	*size = get_length(ls);
 	i = -1;
 	err = 0;
-	while (++i < *size && !err)
+	while (ls[i] && ++i < *size && !err)
 	{
+		sp = ft_split(trim(ls[i]), ' ');
+		j = get_length(ls);
+		*size += j;
+		while (j < get_length(ls))
 		err = str_is_int(ls[i]);
 		if (!err)
 		{
@@ -108,5 +102,5 @@ int	check_input(char **ls, int *size, t_list **stack, int split)
 				err = 1;
 		}
 	}
-	return (free_list(&ls, *size, split), err);
+	return (free_list(&ls, *size), err);
 }

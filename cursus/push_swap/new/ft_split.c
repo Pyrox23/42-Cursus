@@ -6,11 +6,21 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 19:03:28 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 02:01:29 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:11:04 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	get_length(char **ls)
+{
+	int	len;
+
+	len = 0;
+	while (ls[len])
+		len++;
+	return (len);
+}
 
 static size_t	get_words(const char *s, char c)
 {
@@ -60,12 +70,10 @@ static size_t	alloc_word(char **arr, const char *s, char c)
 	return (word_len);
 }
 
-void	free_list(char ***arr, size_t len, int clear)
+void	free_list(char ***arr, size_t len)
 {
 	size_t	i;
 
-	if (!clear)
-		return ;
 	i = 0;
 	while (i < len)
 		free(arr[0][i++]);
@@ -92,7 +100,7 @@ char	**ft_split(char const *s, char c)
 		{
 			i += alloc_word(&arr[j], s + i, c);
 			if (!arr[j++])
-				free_list(&arr, j - 1, 1);
+				free_list(&arr, j - 1);
 		}
 		else
 			i++;
