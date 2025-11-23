@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 20:10:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/22 19:06:42 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/22 23:21:13 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ char	*trim(char *s1)
 	while (s1[end])
 		end++;
 	if (start == end)
-		return (s1[start]);
+		return (&s1[start]);
 	end--;
 	while (start != end && s1[end] == ' ')
 		end--;
 	s1[end + 1] = 0;
-	return (s1[start]);
+	return (&s1[start]);
 }

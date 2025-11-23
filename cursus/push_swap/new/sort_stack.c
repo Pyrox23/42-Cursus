@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:02:19 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 21:25:05 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/23 01:22:45 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	assign_keys(t_stacks *data, int *lst)
 			node = node->next;
 		node->key = i++;
 	}
-	free(lst);
 }
 
 void	push_chunks_b(t_stacks *data)
@@ -43,10 +42,7 @@ void	push_chunks_b(t_stacks *data)
 	int	chunk;
 	int	i;
 
-	if (data->size_a <= 100)
-		chunk = 20;
-	else
-		chunk = 55;
+	chunk = data->size_a / 10 + 11;
 	i = chunk;
 	while (data->size_a)
 	{
@@ -121,8 +117,12 @@ t_list	*sort_stack(t_stacks data)
 	aux = copy_stack(data.stk_a, data.size_a);
 	if (!aux)
 		stop_program(data.stk_a, EXIT_FAILURE);
-	assign_keys(&data, aux);
-	push_chunks_b(&data);
-	push_back(&data);
+	if (!is_sorted(aux, data.size_a))
+	{
+		assign_keys(&data, aux);
+		push_chunks_b(&data);
+		push_back(&data);
+	}
+	free(aux);
 	return (data.stk_a);
 }

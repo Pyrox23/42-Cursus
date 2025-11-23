@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 19:45:43 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/21 21:01:01 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/23 03:32:00 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,20 @@ void	sort_45(t_stacks *data)
 
 t_list	*tiny_sort(t_stacks data)
 {
-	if (data.size_a == 2)
-		sort_2(&data);
-	else if (data.size_a == 3)
-		sort_3(&data);
-	else
-		sort_45(&data);
+	int	*aux;
+
+	aux = copy_stack(data.stk_a, data.size_a);
+	if (!aux)
+		stop_program(data.stk_a, EXIT_FAILURE);
+	if (!is_sorted(aux, data.size_a))
+	{
+		if (data.size_a == 2)
+			sort_2(&data);
+		else if (data.size_a == 3)
+			sort_3(&data);
+		else
+			sort_45(&data);
+	}
+	free(aux);
 	return (data.stk_a);
 }

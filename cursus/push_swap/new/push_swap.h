@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:41 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/22 19:12:01 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/23 03:29:57 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,25 @@ void	reverse_rotate(t_stacks *data, int stack);
 int		is_sorted(int *stack, int size);
 void	swap_dirs(int *a, int *b);
 int		*copy_stack(t_list *stack, int size);
+char	*trim(char *s1);
 
-/* void	print_stk(t_list *stack)
-{
-	t_list	*node;
+/* 
+	#include <stdio.h>
 
-	printf("stk_a:\n");
-	node = stack;
-	while (node)
+	void	print_stk(t_list *stack)
 	{
-		printf("%d, key: %d\n", node->content, node->key);
-		node = node->next;
-	}
-} */
+		t_list	*node;
 
-//ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_linux $ARG
-//valgrind --leak-check=full ./push_swap ""
+		printf("stk_a:\nTop -> ===============\n");
+		node = stack;
+		while (node)
+		{
+			printf("%d\n", node->content);
+			node = node->next;
+		}
+		printf("Bot -> ===============\n");
+	}
+	print_stk(s_in);
+*/
 
 #endif

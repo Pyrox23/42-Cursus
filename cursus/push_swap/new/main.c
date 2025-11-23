@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 18:26:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/22 18:59:36 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/23 03:04:38 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,10 @@ int	main(int ac, char **av)
 
 	if (ac <= 1)
 		return (0);
-	if (ac == 2 && !av[1][0])
-		stop_program(NULL, EXIT_FAILURE);
 	size = --ac;
 	s_in = NULL;
 	if (check_input(av + 1, &size, &s_in))
 		stop_program(s_in, EXIT_FAILURE);
-	if (!size)
-		return (0);
 	if (size == 1)
 		stop_program(s_in, EXIT_SUCCESS);
 	if (size <= 5)
