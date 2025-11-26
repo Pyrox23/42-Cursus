@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:41:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/25 23:39:31 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/26 20:41:33 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	end_program(t_frac *data)
 			mlx_destroy_image(data->mlx, data->image);
 		if (data->window)
 			mlx_destroy_window(data->mlx, data->window);
+		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
 	free(data);
