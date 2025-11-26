@@ -6,26 +6,26 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/22 18:44:51 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/26 19:45:24 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	g_state = 0;
+static int	g_state = 0;
 
 void	read_size(size_t *size, int sig, int *bit, int pid)
 {
-	usleep(LAT);
+	if (!*bit)
+		*size = 0;
 	*size += (sig == SIGUSR1);
-	if ((*bit)++ < 64)
+	if (++(*bit) < 64)
 		*size = *size << 1;
 	kill(pid, SIGUSR1);
 }
 
 void	add_bit(t_minitalk *data, int sig)
 {
-	usleep(LAT);
 	data->c += (sig == SIGUSR1);
 	if (++data->moves < 8)
 		data->c = data->c << 1;
@@ -91,23 +91,25 @@ int	main(void)
 
 	if (!init_signal(sig_handler_serv))
 		return (write(2, "Signal Error!\n", 15), 1);
-	counter = 0;
+	counter = __INT_MAX__;
 	ft_printf("Server started!\nPID: %d\n", getpid());
 	while (1)
 	{
-		if (!usleep(MAX_TIMEOUT))
+		if (g_state == 3)
 		{
-			if (counter == 2 && g_state)
-			{
-				g_state = 2;
-				kill(getpid(), SIGUSR1);
-				g_state = 0;
-				counter = -1;
-			}
-			counter++;
+			g_state = 1;
+			counter = __INT_MAX__;
 		}
+		if (!counter && g_state)
+		{
+			g_state = 2;
+			kill(getpid(), SIGUSR1);
+			g_state = 0;
+		}
+		else if (!counter)
+			counter = __INT_MAX__;
 		else
-			counter = 0;
+			counter--;
 	}
 	return (0);
 }

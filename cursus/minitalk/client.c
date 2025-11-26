@@ -6,17 +6,19 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:55:14 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/22 18:45:09 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/26 19:37:28 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	g_status = 1;
+static int	g_status = 1;
 
-void	send_bit(t_minitalk *data)
+int	send_bit(t_minitalk *data)
 {
-	usleep(LAT);
+	int	conn;
+
+	g_status = 2;
 	if (!data->moves)
 	{
 		data->moves = 8;
@@ -33,17 +35,27 @@ void	send_bit(t_minitalk *data)
 			data->sig = SIGUSR2;
 	}
 	kill(data->pid, data->sig);
+	conn = __INT_MAX__;
+	while (g_status == 2 && conn)
+		conn--;
+	return (conn);
 }
 
-void	send_len(t_minitalk *data)
+int	send_len(t_minitalk *data)
 {
-	usleep(LAT);
+	int	conn;
+
+	g_status = 2;
 	data->c = data->len >> (--data->moves);
 	if (data->c % 2)
 		data->sig = SIGUSR1;
 	else
 		data->sig = SIGUSR2;
 	kill(data->pid, data->sig);
+	conn = __INT_MAX__;
+	while (g_status == 2 && conn)
+		conn--;
+	return (conn);
 }
 
 void	sig_handler(int sig)
@@ -61,16 +73,10 @@ int	main_loop(t_minitalk *data)
 	conn = 1;
 	ft_printf("Client started!\nPID: %d\n", getpid());
 	while (g_status && data->moves && conn)
-	{
-		send_len(data);
-		conn = usleep(MAX_TIMEOUT);
-	}
+		conn = send_len(data);
 	data->moves = 8;
 	while (g_status && conn)
-	{
-		send_bit(data);
-		conn = usleep(MAX_TIMEOUT);
-	}
+		conn = send_bit(data);
 	if (g_status)
 		return (write(2, "Error: No response from server\n", 31), 1);
 	else if (data->dummy != data->str + data->len)
