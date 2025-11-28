@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:34:36 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/25 23:30:00 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/28 01:45:20 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
 # include <stdio.h>
 # include <errno.h>
-# include <float.h>
 # include "mlx/mlx.h"
 # define WIDTH 800
 # define HEIGHT 600
@@ -29,6 +27,7 @@
 # define K_DW 65364
 # define K_LF 65361
 # define K_RG 65363
+# define K_C 99
 
 typedef struct s_frac
 {
@@ -55,7 +54,8 @@ typedef struct s_frac
 }			t_frac;
 
 int		end_program(t_frac *data);
-int		init_struct(t_frac *data, int init_c);
+void	init_struct(t_frac *data);
+int		init_struct_mlx(t_frac *data, int init_c);
 int		check_c_val(t_frac *data, char **av, int ac);
 void	make_fractal(t_frac *data);
 int		key_reader(int k_code, t_frac *data);
@@ -66,5 +66,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		str_is_float(char *str);
 double	ft_atof(const char *str);
 void	put_pixel(t_frac *data, int color);
+char	*trim(char *str);
+int		change_color(void);
+void	print_image(t_frac *data, void (*f)(t_frac *));
 
 #endif

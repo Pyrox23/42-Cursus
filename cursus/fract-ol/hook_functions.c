@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:41:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/26 20:41:33 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/28 01:40:13 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	zoom(t_frac *data, int x, int y, int move)
 			- (y / (data->zoom / zoom_fact));
 		data->zoom /= zoom_fact;
 	}
-	printf("Actual: zoom = %f, ox = %f, oy = %f\n", data->zoom, data->off_x, data->off_y);
 }
 
 int	key_reader(int k_code, t_frac *data)
@@ -49,6 +48,8 @@ int	key_reader(int k_code, t_frac *data)
 		data->off_x -= 5 / data->zoom;
 	else if (k_code == K_RG)
 		data->off_x += 5 / data->zoom;
+	else if (k_code == K_C)
+		data->color = change_color();
 	else
 		return (0);
 	make_fractal(data);
@@ -79,7 +80,6 @@ int	end_program(t_frac *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	free(data);
 	exit(ret);
 	return (0);
 }

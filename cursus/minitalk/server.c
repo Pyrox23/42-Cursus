@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:16:23 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/26 19:45:24 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/27 00:58:08 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	read_size(size_t *size, int sig, int *bit, int pid)
 
 void	add_bit(t_minitalk *data, int sig)
 {
+	g_state = 3;
 	data->c += (sig == SIGUSR1);
 	if (++data->moves < 8)
 		data->c = data->c << 1;

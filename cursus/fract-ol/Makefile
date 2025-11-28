@@ -12,21 +12,20 @@ SRC = main.c \
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 CC = cc
 
 all: $(NAME)
 
-#-framework OpenGL -framework AppKit
 $(NAME): $(OBJ) $(MLX)
-	$(CC) $(CFLAGS) $^ -L$(MLX_DIR) -lmlx -lXext -lX11 -o $(NAME)
+	$(CC) $(CFLAGS) $^ -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME)
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -Imlx -Iincludes -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:
 	rm -f $(OBJ)

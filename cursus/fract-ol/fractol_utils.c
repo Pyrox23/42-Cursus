@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:38:11 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/25 23:30:12 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/28 01:03:22 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,22 @@ double	ft_atof(const char *str)
 		i++;
 	sign = 1;
 	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
+		if (str[i++] == '-')
 			sign = -1;
-		i++;
-	}
 	while (str[i] && str[i] <= '9' && str[i] >= '0')
 		nbr = nbr * 10.0 + (str[i++] - '0');
-	if (str[i] && str[i] == '.')
-		i++;
-	j = i;
+	if (str[i] && str[i] != '.')
+		return (nbr * sign);
+	j = i + 1;
 	while (str[j] && str[j] <= '9' && str[j] >= '0')
 	{
-		nbr = nbr + (str[j] - '0') / (10.0 * j);
+		nbr = nbr + (str[j] - '0') / pow(10.0, j - i);
 		j++;
 	}
 	return (nbr * sign);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *str, const char *s2, size_t n)
 {
 	int				comp;
 	size_t			i;
@@ -54,7 +51,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	comp = 0;
 	i = 0;
-	str1 = (unsigned char *) s1;
+	str1 = (unsigned char *) str;
 	str2 = (unsigned char *) s2;
 	while (str1[i] && str2[i] && !comp && i < n)
 	{
@@ -66,43 +63,26 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (comp);
 }
 
-int	str_is_float(char *str)
+char	*trim(char *str)
 {
-	int	i;
-	int	err;
+	size_t	start;
+	size_t	end;
 
-	if (!*str)
-		return (1);
-	i = 0;
-	err = 0;
-	while (str[i] && str[i] != '.' && !err)
-	{
-		if ((str[i] == '-' || str[i] == '+') && i == 0 && str[i + 1])
-			i++;
-		err = !(str[i] >= '0' && str[i] <= '9');
-		i++;
-	}
-	printf("@flt err = %d, c_stop = %c\n", err, str[i]);
-	if (!err && str[i] == '.')
-	{
-		i++;
-		while (str[i] && !err)
-		{
-			err = !(str[i] >= '0' && str[i] <= '9');
-			i++;
-		}
-	}
-	return (err);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	start = 0;
+	if (!str)
+		return (str);
+	while (str[start] && str[start] == ' ')
+		start++;
+	end = start;
+	while (str[end])
+		end++;
+	if (start == end)
+		return (&str[start]);
+	end--;
+	while (start != end && str[end] == ' ')
+		end--;
+	str[end + 1] = 0;
+	return (&str[start]);
 }
 
 void	put_pixel(t_frac *data, int color)
@@ -111,4 +91,15 @@ void	put_pixel(t_frac *data, int color)
 
 	aux = (data->y * data->s_line) + (data->x * (data->bpp / 8));
 	*(unsigned *)(data->image_ptr + aux) = color;
+}
+
+int	change_color(void)
+{
+	static int	list[10] = {0x4B0082, 0xFCBE11, 11894492, 0x0047FF, 0x9966CC,
+		0x9A0EEA, 0x00CED1, 0xFF4500, 0x2F4F4F, 0x191970};
+	static int	color = 1;
+
+	if (color > 9)
+		color = 0;
+	return (list[color++]);
 }

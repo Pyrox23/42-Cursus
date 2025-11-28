@@ -6,14 +6,16 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:38:34 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/25 15:07:40 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/28 01:41:21 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	init_struct_mlx(t_frac *data)
+int	init_struct_mlx(t_frac *data, int init_c)
 {
+	if (init_c == 1)
+		return (0);
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (0);
@@ -25,27 +27,55 @@ static int	init_struct_mlx(t_frac *data)
 		return (0);
 	data->image_ptr = mlx_get_data_addr(data->image, &data->bpp,
 			&data->s_line, &data->endian);
+	if (init_c)
+	{
+		data->cx = -0.835;
+		data->cy = -0.2321;
+	}
 	return (1);
 }
 
-int	init_struct(t_frac *data, int init_c)
+void	init_struct(t_frac *data)
 {
 	data->x = 0;
 	data->y = 0;
-	data->color = 0xFCBE11;
+	data->color = 0x4B0082;
 	data->zoom = 200;
 	data->off_x = -2.28;
 	data->off_y = -1.62;
-	data->max_it = 128;
+	data->max_it = 100;
 	data->mlx = NULL;
 	data->window = NULL;
 	data->image = NULL;
-	if (init_c)
+}
+
+int	str_is_float(char *str)
+{
+	int	i;
+	int	err;
+
+	if (!*str)
+		return (1);
+	i = 0;
+	err = 0;
+	while (str[i] && str[i] != '.' && !err)
 	{
-		data->cx = -0.745429;
-		data->cy = 0.05;
+		if ((str[i] == '-' || str[i] == '+') && i == 0 && str[i + 1])
+			i++;
+		err = !((str[i] >= '0' && str[i] <= '9') || str[i] == '.');
+		if (str[i] != '.')
+			i++;
 	}
-	return (init_struct_mlx(data));
+	if (!err && str[i] == '.')
+	{
+		i++;
+		while (str[i] && !err)
+		{
+			err = !(str[i] >= '0' && str[i] <= '9');
+			i++;
+		}
+	}
+	return (err);
 }
 
 int	check_c_val(t_frac *data, char **av, int ac)
@@ -54,13 +84,13 @@ int	check_c_val(t_frac *data, char **av, int ac)
 	int	err;
 
 	if (ac == 2)
-		return (1);
+		return (2);
 	i = 2;
 	err = 0;
 	while (i < ac && !err)
 	{
+		av[i] = trim(av[i]);
 		err = str_is_float(av[i]);
-		printf("@check: err = %d, i = %d, nb = %s\n", err, i, av[i]);
 		if (!err)
 		{
 			if (i == 2)
@@ -71,4 +101,19 @@ int	check_c_val(t_frac *data, char **av, int ac)
 		i++;
 	}
 	return (err);
+}
+
+void	print_image(t_frac *data, void (*f)(t_frac *))
+{
+	data->x = 0;
+	while (data->x < WIDTH)
+	{
+		data->y = 0;
+		while (data->y < HEIGHT)
+		{
+			f(data);
+			data->y++;
+		}
+		data->x++;
+	}
 }
