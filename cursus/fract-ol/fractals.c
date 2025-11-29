@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 18:33:57 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/28 01:47:38 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/29 02:52:58 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	get_val_julia(t_frac *data)
 	else
 		put_pixel(data, data->color + (i * 5000));
 }
-
 
 static void	get_val_celtic(t_frac *data)
 {

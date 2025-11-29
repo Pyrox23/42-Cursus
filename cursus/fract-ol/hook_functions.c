@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:41:45 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/28 01:40:13 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/29 03:14:31 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	zoom(t_frac *data, int x, int y, int move)
 	zoom_fact = 1.25;
 	if (move == 4)
 	{
+		if (data->zoom > DBL_MAX / zoom_fact)
+			return ;
 		data->off_x = (x / data->zoom + data->off_x)
 			- (x / (data->zoom * zoom_fact));
 		data->off_y = (y / data->zoom + data->off_y)
@@ -27,6 +29,8 @@ void	zoom(t_frac *data, int x, int y, int move)
 	}
 	else
 	{
+		if (data->zoom < DBL_MIN * zoom_fact)
+			return ;
 		data->off_x = (x / data->zoom + data->off_x)
 			- (x / (data->zoom / zoom_fact));
 		data->off_y = (y / data->zoom + data->off_y)
@@ -37,17 +41,19 @@ void	zoom(t_frac *data, int x, int y, int move)
 
 int	key_reader(int k_code, t_frac *data)
 {
-	printf("Key! code = %d\n", k_code);
+	double	move;
+
+	move = 5.0 / data->zoom;
 	if (k_code == ESC)
 		end_program(data);
-	else if (k_code == K_UP)
-		data->off_y -= 5 / data->zoom;
-	else if (k_code == K_DW)
-		data->off_y += 5 / data->zoom;
-	else if (k_code == K_LF)
-		data->off_x -= 5 / data->zoom;
-	else if (k_code == K_RG)
-		data->off_x += 5 / data->zoom;
+	else if (k_code == K_UP && data->off_y - move > -FOV_LIMIT)
+		data->off_y -= move;
+	else if (k_code == K_DW && data->off_y + move < FOV_LIMIT)
+		data->off_y += move;
+	else if (k_code == K_LF && data->off_x - move > -FOV_LIMIT)
+		data->off_x -= move;
+	else if (k_code == K_RG && data->off_x + move < FOV_LIMIT)
+		data->off_x += move;
 	else if (k_code == K_C)
 		data->color = change_color();
 	else

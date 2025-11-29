@@ -18,6 +18,8 @@ CC = cc
 
 all: $(NAME)
 
+bonus: all
+
 $(NAME): $(OBJ) $(MLX)
 	$(CC) $(CFLAGS) $^ -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME)
 

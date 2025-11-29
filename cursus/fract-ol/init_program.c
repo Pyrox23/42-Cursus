@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 17:38:34 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/28 01:41:21 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/29 03:17:19 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	init_struct(t_frac *data)
 	data->zoom = 200;
 	data->off_x = -2.28;
 	data->off_y = -1.62;
-	data->max_it = 100;
+	data->max_it = 128;
 	data->mlx = NULL;
 	data->window = NULL;
 	data->image = NULL;
+	data->fract_len = ft_strlen(data->fract);
 }
 
 int	str_is_float(char *str)

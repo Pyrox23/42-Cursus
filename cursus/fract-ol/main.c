@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 17:26:38 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/28 01:43:23 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/29 01:08:01 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	main(int ac, char **av)
 	if (ac < 2 || ac == 3 || ac > 4)
 		return (print_error(), 1);
 	data.fract = av[1];
-	data.fract_len = ft_strlen(data.fract);
 	init_struct(&data);
-	if ((data.fract_len == 10
-			&& !ft_strncmp(data.fract, "mandelbrot", 10) && ac == 4))
+	if ((data.fract_len == 10 || data.fract_len == 6)
+		&& (!ft_strncmp(data.fract, "mandelbrot", 10)
+			|| !ft_strncmp(data.fract, "celtic", 6)) && ac == 4)
 		return (print_error(), 1);
 	if (init_struct_mlx(&data, check_c_val(&data, av, ac)))
 	{
@@ -54,7 +54,6 @@ int	main(int ac, char **av)
 	else
 	{
 		print_error();
-		perror("malloc");
 		end_program(&data);
 	}
 	return (0);

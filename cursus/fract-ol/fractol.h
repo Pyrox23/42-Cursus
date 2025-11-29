@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 16:34:36 by ramo-cou          #+#    #+#             */
-/*   Updated: 2025/11/28 01:45:20 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2025/11/29 03:08:54 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <errno.h>
+# include <float.h>
 # include "mlx/mlx.h"
+# define FOV_LIMIT 1e20
 # define WIDTH 800
 # define HEIGHT 600
 # define MOUSE_UP 4
