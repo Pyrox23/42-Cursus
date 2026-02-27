@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 21:30:33 by ramo-cou          #+#    #+#             */
-/*   Updated: 2026/02/26 19:53:35 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2026/02/27 19:03:00 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	create_reference(char **av, int ac, int n_philos, t_data *ref)
 	ref->t_eat = ft_atol(av[2]);
 	ref->t_sleep = ft_atol(av[3]);
 	ref->end = 0;
+	ref->philo_finish = 0;
 	if (ac == 5)
 		ref->n_eat = ft_atol(av[4]);
 	else

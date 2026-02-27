@@ -6,7 +6,7 @@
 /*   By: ramo-cou <ramo-cou@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:52:16 by ramo-cou          #+#    #+#             */
-/*   Updated: 2026/02/26 20:21:50 by ramo-cou         ###   ########.fr       */
+/*   Updated: 2026/02/27 18:26:30 by ramo-cou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,3 @@ int	main(int ac, char **av)
 	stop_p(table, table[0]->common);
 	return (0);
 }
-
-//printf("id: %d, other_fork: %d\nForks at %p\nData at %p:\nt_die: %lu\nt_eat: %u\nt_sleep: %lu\nn_eat: %u\n", table[i]->id, table[i]->other_fork, table[i]->common->forks, (void *) table[i]->common, table[i]->common->t_die, table[i]->common->t_eat, table[i]->common->t_sleep, table[i]->common->n_eat);
-
